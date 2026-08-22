@@ -35,7 +35,7 @@ function boundsOverlap(first, second) {
     && first.north >= second.south
 }
 
-function pointInRing([longitude, latitude], ring) {
+export function pointInRing([longitude, latitude], ring) {
   let inside = false
 
   for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
