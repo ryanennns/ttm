@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
     "check:company-data": "node scripts/check-company-data.mjs",
     "check:geometry": "node scripts/check-building-geometry.mjs",

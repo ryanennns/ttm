@@ -215,6 +215,7 @@ const selectedCompanyMarkerMaterial = new THREE.SpriteMaterial({
 })
 const COMPANY_MARKER_SIZE = 7
 const COMPANY_MARKER_FALLBACK_Y = 18
+const COMPANY_MARKERS_VISIBLE = false
 const buildingPlacements = []
 
 function projectCoordinate([longitude, latitude]) {
@@ -543,6 +544,7 @@ function createScene() {
   roadGroup = new THREE.Group()
   buildingGroup = new THREE.Group()
   companyGroup = new THREE.Group()
+  companyGroup.visible = COMPANY_MARKERS_VISIBLE
   scene.add(roadGroup, buildingGroup, companyGroup)
   addCompanyMarkers()
 
@@ -644,7 +646,7 @@ function clearCompanySelection() {
 }
 
 function selectCompanyAt(event) {
-  if (!renderer || !camera || !companyGroup) return
+  if (!renderer || !camera || !companyGroup?.visible) return
   const bounds = renderer.domElement.getBoundingClientRect()
   pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1
   pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1
