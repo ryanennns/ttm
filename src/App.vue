@@ -104,6 +104,7 @@ let animationFrame
 let buildingGroup
 let roadGroup
 let lastStatusUpdate = 0
+let twoFingerMode
 const touchPositions = new Map()
 const touchMovement = new Map()
 const seenBuildingIds = new Set()
@@ -439,12 +440,14 @@ function handleTouchPointer(event) {
   if (event.type === 'pointerdown') {
     touchPositions.set(event.pointerId, { x: event.pageX, y: event.pageY })
     touchMovement.set(event.pointerId, 0)
+    if (touchPositions.size === 2) twoFingerMode = undefined
     return
   }
 
   if (event.type === 'pointerup' || event.type === 'pointercancel') {
     touchPositions.delete(event.pointerId)
     touchMovement.delete(event.pointerId)
+    if (touchPositions.size < 2) twoFingerMode = undefined
     return
   }
 
@@ -462,9 +465,14 @@ function handleTouchPointer(event) {
 
   touchPositions.set(event.pointerId, { x: event.pageX, y: event.pageY })
   touchMovement.set(event.pointerId, moved)
+  if (!twoFingerMode) {
+    if (moved < 2 && otherMoved < 2) return
+    twoFingerMode = otherMoved >= 2 && moved >= 2 && Math.abs(distance - previousDistance) > 2 ? 'zoom' : 'rotate'
+  }
+
   controls._trackPointer(event)
   event.stopImmediatePropagation()
-  if (otherMoved >= 2 && moved >= 2 && Math.abs(distance - previousDistance) > 2) controls._handleTouchMoveDolly(event)
+  if (twoFingerMode === 'zoom') controls._handleTouchMoveDolly(event)
   else controls._handleTouchMoveRotate(event)
   controls.update()
 }
