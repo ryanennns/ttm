@@ -19,6 +19,20 @@
       </div>
     </div>
 
+    <aside
+      v-if="selectedCompany"
+      class="company-card"
+      aria-live="polite"
+      @pointerdown.stop
+    >
+      <button class="company-card-close" type="button" aria-label="Close company details" @click="clearCompanySelection">×</button>
+      <p class="eyebrow"><span></span> GREGSLIST MARKER</p>
+      <h2>{{ selectedCompany.name }}</h2>
+      <p v-if="selectedCompany.address" class="company-address">{{ selectedCompany.address }}</p>
+      <p v-else class="company-address company-address-missing">Address not listed</p>
+      <a href="https://gregslist.com/toronto/" target="_blank" rel="noreferrer">OPEN SOURCE LIST ↗</a>
+    </aside>
+
     <section v-if="showMobileTutorial" class="mobile-tutorial" aria-labelledby="tutorial-title">
       <div class="tutorial-card">
         <div class="tutorial-progress" aria-hidden="true">
@@ -97,6 +111,7 @@
     <footer class="footer-bar">
       <span>BUILD 001&nbsp; / &nbsp;BAY—ADELAIDE NODE</span>
       <span class="footer-right">BUILDING OUTLINES + HEIGHT ATTRIBUTES&nbsp; / &nbsp;2026</span>
+      <span class="footer-source">COMPANY DATA / <a href="https://gregslist.com/toronto/interactive-map/" target="_blank" rel="noreferrer">GREGSLIST MAP</a> / <a href="https://gregslist.com/toronto/" target="_blank" rel="noreferrer">SOURCE LIST</a></span>
     </footer>
   </main>
 </template>
@@ -107,6 +122,8 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { selectBuildingFeatures } from './building-geometry.js'
+import companyData from './companies.json'
+import { selectCompanyRecords } from './company-data.js'
 
 const viewport = ref(null)
 const loading = ref(true)
@@ -115,6 +132,7 @@ const statusMessage = ref('Connecting to Toronto municipal data…')
 const showMobileTutorial = ref(false)
 const tutorialStep = ref(0)
 const zoomRate = ref(0)
+const selectedCompany = ref(null)
 const tutorialSteps = [
   { title: 'Zoom the city', description: 'Pinch or stretch with two fingers to zoom in and out.', gesture: 'zoom' },
   { title: 'Pan the camera', description: 'Drag with one finger to move across the city.', gesture: 'pan' },
@@ -122,6 +140,7 @@ const tutorialSteps = [
 ]
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
+const PAN_RADIUS_METERS = 1_000
 const RADIUS_METERS = 2_500
 const TILE_METERS = 750
 // ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
@@ -135,10 +154,14 @@ const REQUEST_TIMEOUT_MS = 15_000
 const REQUEST_RETRIES = 1
 const BUILDING_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/2/query'
 const ROAD_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/3/query'
+const sceneCompanies = selectCompanyRecords(companyData, {
+  center: { lat: CENTER.lat, lng: CENTER.lon },
+  radiusMeters: RADIUS_METERS,
+})
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x0d171d)
-scene.fog = new THREE.Fog(0x0d171d, 700, 2_600)
+scene.fog = new THREE.Fog(0x000000, 1_000 * SCALE, RADIUS_METERS * SCALE)
 
 let renderer
 let camera
@@ -146,36 +169,28 @@ let controls
 let animationFrame
 let buildingGroup
 let roadGroup
+let companyGroup
+let selectedMarker
 let lastStatusUpdate = 0
 let twoFingerMode
 const touchPositions = new Map()
 const touchMovement = new Map()
+const pointerStarts = new Map()
 const seenBuildingIds = new Set()
 const seenRoadIds = new Set()
+const raycaster = new THREE.Raycaster()
+const pointer = new THREE.Vector2()
 
 const clock = new THREE.Clock()
 
 const statusLabel = computed(() => (error.value ? 'SOURCE OFFLINE' : loading.value ? 'SYNCING DATA' : 'LIVE DATA'))
 
-const colorPalette = [0x6e9697, 0x7f9a9a, 0xb18c6b, 0x8b7c83, 0x63818c]
-const materialPairs = new Map()
-
-function materialBucket(height) {
-  return height > 180 ? 0 : height > 110 ? 1 : height > 55 ? 2 : 3
-}
-
-function getMaterialPair(height) {
-  const bucket = materialBucket(height)
-  if (!materialPairs.has(bucket)) {
-    const sideColor = new THREE.Color(colorPalette[bucket])
-    const roofColor = sideColor.clone().offsetHSL(0, -0.02, 0.1)
-    materialPairs.set(bucket, [
-      new THREE.MeshStandardMaterial({ color: sideColor, roughness: 0.9, flatShading: true }),
-      new THREE.MeshStandardMaterial({ color: roofColor, roughness: 0.95, flatShading: true }),
-    ])
-  }
-  return materialPairs.get(bucket)
-}
+const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0x6e9697, roughness: 0.9, flatShading: true })
+const companyMarkerMaterial = new THREE.MeshBasicMaterial({ color: 0xf0b67f, depthTest: false, depthWrite: false })
+const selectedCompanyMarkerMaterial = new THREE.MeshBasicMaterial({ color: 0xffedc8, depthTest: false, depthWrite: false })
+const companyMarkerBaseGeometry = new THREE.CylinderGeometry(3.2, 3.2, 0.8, 8)
+const companyMarkerStemGeometry = new THREE.CylinderGeometry(0.45, 0.45, 5, 6)
+const companyMarkerHeadGeometry = new THREE.SphereGeometry(2.4, 8, 6)
 
 function projectCoordinate([longitude, latitude]) {
   return {
@@ -256,6 +271,37 @@ function featureGeometries(feature, height, baseElevation) {
   return parts
 }
 
+function setCompanyMarkerSelected(marker, selected) {
+  marker.scale.setScalar(selected ? 1.35 : 1)
+  marker.traverse((part) => {
+    if (part.isMesh) part.material = selected ? selectedCompanyMarkerMaterial : companyMarkerMaterial
+  })
+}
+
+function addCompanyMarkers() {
+  for (const company of sceneCompanies) {
+    const point = projectCoordinate([company.lng, company.lat])
+    const marker = new THREE.Group()
+    marker.position.set(point.x, 0, point.z)
+    marker.userData.company = company
+
+    const base = new THREE.Mesh(companyMarkerBaseGeometry, companyMarkerMaterial)
+    base.position.y = 0.4
+    const stem = new THREE.Mesh(companyMarkerStemGeometry, companyMarkerMaterial)
+    stem.position.y = 3.3
+    const head = new THREE.Mesh(companyMarkerHeadGeometry, companyMarkerMaterial)
+    head.position.y = 6.2
+    marker.add(base, stem, head)
+    marker.traverse((part) => {
+      if (part.isMesh) {
+        part.userData.company = company
+        part.userData.companyMarker = marker
+      }
+    })
+    companyGroup.add(marker)
+  }
+}
+
 function addBuildings(collection) {
   const features = selectBuildingFeatures((collection.features || []).filter(
     (feature) => {
@@ -270,7 +316,7 @@ function addBuildings(collection) {
     const height = getHeight(feature.properties)
     const parts = featureGeometries(feature, height, GROUND_ELEVATION)
     for (const geometry of parts) {
-      const mesh = new THREE.Mesh(geometry, getMaterialPair(height))
+      const mesh = new THREE.Mesh(geometry, buildingMaterial)
       mesh.castShadow = false
       mesh.receiveShadow = true
       buildingGroup.add(mesh)
@@ -449,7 +495,9 @@ function createScene() {
 
   roadGroup = new THREE.Group()
   buildingGroup = new THREE.Group()
-  scene.add(roadGroup, buildingGroup)
+  companyGroup = new THREE.Group()
+  scene.add(roadGroup, buildingGroup, companyGroup)
+  addCompanyMarkers()
 
 }
 
@@ -532,6 +580,58 @@ function handleTouchPointer(event) {
   controls.update()
 }
 
+function handleCompanyPointerDown(event) {
+  if (event.button !== undefined && event.button !== 0) return
+  pointerStarts.set(event.pointerId, { x: event.clientX, y: event.clientY, moved: false })
+}
+
+function handleCompanyPointerMove(event) {
+  const start = pointerStarts.get(event.pointerId)
+  if (start && Math.hypot(event.clientX - start.x, event.clientY - start.y) > 6) start.moved = true
+}
+
+function clearCompanySelection() {
+  if (selectedMarker) setCompanyMarkerSelected(selectedMarker, false)
+  selectedMarker = undefined
+  selectedCompany.value = null
+}
+
+function selectCompanyAt(event) {
+  if (!renderer || !camera || !companyGroup) return
+  const bounds = renderer.domElement.getBoundingClientRect()
+  pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1
+  pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1
+  raycaster.setFromCamera(pointer, camera)
+
+  const hit = raycaster.intersectObjects(companyGroup.children, true)[0]
+  if (!hit?.object.userData.company) {
+    clearCompanySelection()
+    return
+  }
+
+  if (selectedMarker !== hit.object.userData.companyMarker) {
+    if (selectedMarker) setCompanyMarkerSelected(selectedMarker, false)
+    selectedMarker = hit.object.userData.companyMarker
+    setCompanyMarkerSelected(selectedMarker, true)
+  }
+  selectedCompany.value = hit.object.userData.company
+}
+
+function handleCompanyPointerUp(event) {
+  const start = pointerStarts.get(event.pointerId)
+  pointerStarts.delete(event.pointerId)
+  if (!start || start.moved || Math.hypot(event.clientX - start.x, event.clientY - start.y) > 6) return
+  selectCompanyAt(event)
+}
+
+function handleCompanyPointerCancel(event) {
+  pointerStarts.delete(event.pointerId)
+}
+
+function handleKeydown(event) {
+  if (event.key === 'Escape') clearCompanySelection()
+}
+
 function dismissTutorial() {
   showMobileTutorial.value = false
   localStorage.setItem('toronto-tech-map-mobile-tutorial-seen', '1')
@@ -557,6 +657,7 @@ onMounted(() => {
 
   controls = new OrbitControls(camera, renderer.domElement)
   controls.target.set(0, 0, 0)
+  controls.maxTargetRadius = PAN_RADIUS_METERS * SCALE
   controls.enableDamping = true
   controls.dampingFactor = 0.075
   controls.panSpeed = 2
@@ -581,8 +682,13 @@ onMounted(() => {
   renderer.domElement.addEventListener('pointermove', handleTouchPointer, { capture: true })
   renderer.domElement.addEventListener('pointerup', handleTouchPointer, { capture: true })
   renderer.domElement.addEventListener('pointercancel', handleTouchPointer, { capture: true })
+  renderer.domElement.addEventListener('pointerdown', handleCompanyPointerDown)
+  renderer.domElement.addEventListener('pointermove', handleCompanyPointerMove)
+  renderer.domElement.addEventListener('pointerup', handleCompanyPointerUp)
+  renderer.domElement.addEventListener('pointercancel', handleCompanyPointerCancel)
 
   window.addEventListener('resize', resizeScene)
+  window.addEventListener('keydown', handleKeydown)
   animate()
   loadMapData()
 })
@@ -595,6 +701,11 @@ onBeforeUnmount(() => {
   renderer?.domElement.removeEventListener('pointermove', handleTouchPointer, { capture: true })
   renderer?.domElement.removeEventListener('pointerup', handleTouchPointer, { capture: true })
   renderer?.domElement.removeEventListener('pointercancel', handleTouchPointer, { capture: true })
+  renderer?.domElement.removeEventListener('pointerdown', handleCompanyPointerDown)
+  renderer?.domElement.removeEventListener('pointermove', handleCompanyPointerMove)
+  renderer?.domElement.removeEventListener('pointerup', handleCompanyPointerUp)
+  renderer?.domElement.removeEventListener('pointercancel', handleCompanyPointerCancel)
+  window.removeEventListener('keydown', handleKeydown)
   renderer?.dispose()
 })
 </script>
