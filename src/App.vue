@@ -94,6 +94,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
+import { selectBuildingFeatures } from './building-geometry.js'
 
 const viewport = ref(null)
 const loading = ref(true)
@@ -243,14 +244,14 @@ function featureGeometries(feature, height, baseElevation) {
 }
 
 function addBuildings(collection) {
-  const features = (collection.features || []).filter(
+  const features = selectBuildingFeatures((collection.features || []).filter(
     (feature) => {
       const id = feature.properties?.OBJECTID || feature.properties?.BUILDINGID
       if (!id || seenBuildingIds.has(id)) return false
       seenBuildingIds.add(id)
       return polygonSets(feature.geometry).length && featureDistanceMeters(feature) <= RADIUS_METERS
     },
-  )
+  ), { getHeight, polygonSets, metersPerLongitude: METERS_PER_LONGITUDE, metersPerLatitude: METERS_PER_LATITUDE })
 
   for (const feature of features) {
     const height = getHeight(feature.properties)
