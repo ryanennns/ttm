@@ -128,6 +128,7 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 
 const viewport = ref(null)
 const loading = ref(true)
@@ -139,21 +140,22 @@ const selectedBuilding = ref(null)
 const isHovering = ref(false)
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
-const BOUNDS = Object.freeze({
-  west: -79.3848,
-  south: 43.6466,
-  east: -79.3767,
-  north: 43.6536,
-})
-const SCALE = 0.28
+const RADIUS_METERS = 2_500
+const PICK_RADIUS_METERS = 500
+const TILE_METERS = 750
+// ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
+const GROUND_ELEVATION = 80
+const SCALE = 0.2
 const METERS_PER_LATITUDE = 111_320
 const METERS_PER_LONGITUDE = METERS_PER_LATITUDE * Math.cos((CENTER.lat * Math.PI) / 180)
+const MAP_SIZE = RADIUS_METERS * SCALE * 2 + 100
+const PAGE_SIZE = 2_000
 const BUILDING_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/2/query'
 const ROAD_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/3/query'
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x0d171d)
-scene.fog = new THREE.Fog(0x0d171d, 190, 420)
+scene.fog = new THREE.Fog(0x0d171d, 700, 2_600)
 
 let renderer
 let camera
@@ -166,6 +168,8 @@ let selectionOutline
 let hoveredObject
 let selectedObject
 let lastStatusUpdate = 0
+const seenBuildingIds = new Set()
+const seenRoadIds = new Set()
 
 const pointer = new THREE.Vector2()
 const raycaster = new THREE.Raycaster()
@@ -173,18 +177,18 @@ const clock = new THREE.Clock()
 
 const structureCount = computed(() => (buildingCount.value ? String(buildingCount.value).padStart(3, '0') : '—'))
 const tallestHeight = computed(() => (tallest.value ? String(Math.round(tallest.value)) : '—'))
-const studyArea = computed(() => {
-  const width = (BOUNDS.east - BOUNDS.west) * METERS_PER_LONGITUDE
-  const height = (BOUNDS.north - BOUNDS.south) * METERS_PER_LATITUDE
-  return `${((width * height) / 1_000_000).toFixed(1)} km²`
-})
+const studyArea = computed(() => `${((Math.PI * RADIUS_METERS ** 2) / 1_000_000).toFixed(1)} km²`)
 const statusLabel = computed(() => (error.value ? 'SOURCE OFFLINE' : loading.value ? 'SYNCING DATA' : 'LIVE DATA'))
 
 const colorPalette = [0x6e9697, 0x7f9a9a, 0xb18c6b, 0x8b7c83, 0x63818c]
 const materialPairs = new Map()
 
+function materialBucket(height) {
+  return height > 180 ? 0 : height > 110 ? 1 : height > 55 ? 2 : 3
+}
+
 function getMaterialPair(height) {
-  const bucket = height > 180 ? 0 : height > 110 ? 1 : height > 55 ? 2 : 3
+  const bucket = materialBucket(height)
   if (!materialPairs.has(bucket)) {
     const sideColor = new THREE.Color(colorPalette[bucket])
     const roofColor = sideColor.clone().offsetHSL(0, -0.02, 0.1)
@@ -210,11 +214,19 @@ function pathFromRing(ring) {
   })
 }
 
-function shapeFromRings(rings) {
+function shapeFromRings(rings, inset = 1) {
   if (!rings?.[0]?.length) return null
-  const shape = new THREE.Shape(pathFromRing(rings[0]))
+
+  const outer = pathFromRing(rings[0])
+  const center = outer.reduce(
+    (sum, point) => sum.add(point),
+    new THREE.Vector2(),
+  ).multiplyScalar(1 / outer.length)
+  const scalePoint = (point) => center.clone().add(point.clone().sub(center).multiplyScalar(inset))
+
+  const shape = new THREE.Shape(outer.map(scalePoint))
   for (const hole of rings.slice(1)) {
-    if (hole.length) shape.holes.push(new THREE.Path(pathFromRing(hole)))
+    if (hole.length) shape.holes.push(new THREE.Path(pathFromRing(hole).map(scalePoint)))
   }
   return shape
 }
@@ -224,6 +236,27 @@ function polygonSets(geometry) {
   if (geometry.type === 'Polygon') return [geometry.coordinates]
   if (geometry.type === 'MultiPolygon') return geometry.coordinates
   return []
+}
+
+function featureDistanceMeters(feature) {
+  const ring = polygonSets(feature.geometry)[0]?.[0]
+  if (!ring?.length) return Infinity
+
+  const midpoint = ring.reduce(
+    (sum, [longitude, latitude]) => {
+      sum.lon += longitude
+      sum.lat += latitude
+      return sum
+    },
+    { lon: 0, lat: 0 },
+  )
+  midpoint.lon /= ring.length
+  midpoint.lat /= ring.length
+
+  return Math.hypot(
+    (midpoint.lon - CENTER.lon) * METERS_PER_LONGITUDE,
+    (midpoint.lat - CENTER.lat) * METERS_PER_LATITUDE,
+  )
 }
 
 function getHeight(properties) {
@@ -243,44 +276,103 @@ function getFeatureInfo(feature, baseElevation) {
   }
 }
 
-function addBuildings(collection) {
-  const features = (collection.features || []).filter((feature) => polygonSets(feature.geometry).length)
-  const elevations = features
-    .map((feature) => Number(feature.properties?.ELEVATION))
-    .filter((value) => Number.isFinite(value))
-  const baseElevation = elevations.length ? Math.min(...elevations) : 0
+function buildingTiers(height) {
+  if (height < 18) return [{ inset: 1, bottom: 0, top: height }]
+  if (height < 55) {
+    return [
+      { inset: 1, bottom: 0, top: height * 0.82 },
+      { inset: 0.9, bottom: height * 0.82, top: height },
+    ]
+  }
+  if (height < 120) {
+    return [
+      { inset: 1, bottom: 0, top: height * 0.2 },
+      { inset: 0.94, bottom: height * 0.2, top: height * 0.78 },
+      { inset: 0.78, bottom: height * 0.78, top: height },
+    ]
+  }
+  return [
+    { inset: 1, bottom: 0, top: height * 0.18 },
+    { inset: 0.95, bottom: height * 0.18, top: height * 0.72 },
+    { inset: 0.82, bottom: height * 0.72, top: height * 0.9 },
+    { inset: 0.64, bottom: height * 0.9, top: height },
+  ]
+}
 
-  for (const feature of features) {
-    const info = getFeatureInfo(feature, baseElevation)
-    const group = new THREE.Group()
-    group.userData.building = info
-    group.name = `building-${info.id}`
+function featureGeometries(feature, info, baseElevation) {
+  const baseY = Math.max(0, (Number(feature.properties?.ELEVATION) - baseElevation) * SCALE)
+  const parts = []
 
-    for (const rings of polygonSets(feature.geometry)) {
-      const shape = shapeFromRings(rings)
+  for (const rings of polygonSets(feature.geometry)) {
+    for (const tier of buildingTiers(info.height)) {
+      const shape = shapeFromRings(rings, tier.inset)
       if (!shape) continue
 
       const geometry = new THREE.ExtrudeGeometry(shape, {
-        depth: info.height * SCALE,
+        depth: (tier.top - tier.bottom) * SCALE,
         bevelEnabled: false,
         steps: 1,
         curveSegments: 1,
       })
       geometry.rotateX(-Math.PI / 2)
-
-      const mesh = new THREE.Mesh(geometry, getMaterialPair(info.height))
-      mesh.position.y = Math.max(0, (Number(feature.properties?.ELEVATION) - baseElevation) * SCALE)
-      mesh.userData.building = info
-      mesh.castShadow = false
-      mesh.receiveShadow = true
-      group.add(mesh)
+      geometry.translate(0, baseY + tier.bottom * SCALE, 0)
+      parts.push(geometry)
     }
-
-    if (group.children.length) buildingGroup.add(group)
   }
 
-  buildingCount.value = buildingGroup.children.length
-  tallest.value = features.reduce((max, feature) => Math.max(max, getHeight(feature.properties)), 0)
+  return parts
+}
+
+function addBuildings(collection) {
+  const features = (collection.features || []).filter(
+    (feature) => {
+      const id = feature.properties?.OBJECTID || feature.properties?.BUILDINGID
+      if (!id || seenBuildingIds.has(id)) return false
+      seenBuildingIds.add(id)
+      return polygonSets(feature.geometry).length && featureDistanceMeters(feature) <= RADIUS_METERS
+    },
+  )
+
+  const mergedParts = new Map()
+
+  for (const feature of features) {
+    const info = getFeatureInfo(feature, GROUND_ELEVATION)
+    const parts = featureGeometries(feature, info, GROUND_ELEVATION)
+    const isPickable = featureDistanceMeters(feature) <= PICK_RADIUS_METERS
+
+    if (isPickable) {
+      const group = new THREE.Group()
+      group.userData.building = info
+      group.name = `building-${info.id}`
+      for (const geometry of parts) {
+        const mesh = new THREE.Mesh(geometry, getMaterialPair(info.height))
+        mesh.userData.building = info
+        mesh.castShadow = false
+        mesh.receiveShadow = true
+        group.add(mesh)
+      }
+      if (group.children.length) buildingGroup.add(group)
+    } else {
+      const bucket = materialBucket(info.height)
+      if (!mergedParts.has(bucket)) mergedParts.set(bucket, [])
+      mergedParts.get(bucket).push(...parts)
+    }
+  }
+
+  for (const [bucket, geometries] of mergedParts) {
+    const merged = mergeGeometries(geometries, false)
+    if (!merged) continue
+    merged.computeBoundingSphere()
+    const mesh = new THREE.Mesh(merged, getMaterialPair([240, 140, 80, 30][bucket]))
+    mesh.userData.merged = true
+    mesh.castShadow = false
+    mesh.receiveShadow = true
+    buildingGroup.add(mesh)
+    geometries.forEach((geometry) => geometry.dispose())
+  }
+
+  buildingCount.value += features.length
+  tallest.value = features.reduce((max, feature) => Math.max(max, getHeight(feature.properties)), tallest.value)
 }
 
 function addRoads(collection) {
@@ -291,60 +383,128 @@ function addRoads(collection) {
   })
   const roadEdgeMaterial = new THREE.LineBasicMaterial({ color: 0x385057, transparent: true, opacity: 0.38 })
 
+  const roadGeometries = []
+  const roadEdges = []
+
   for (const feature of collection.features || []) {
+    const id = feature.properties?.OBJECTID
+    if (!id || seenRoadIds.has(id)) continue
+    seenRoadIds.add(id)
+
     for (const rings of polygonSets(feature.geometry)) {
       const shape = shapeFromRings(rings)
       if (!shape) continue
 
       const geometry = new THREE.ShapeGeometry(shape)
       geometry.rotateX(-Math.PI / 2)
-      const road = new THREE.Mesh(geometry, roadMaterial)
-      road.position.y = 0.04
-      roadGroup.add(road)
+      geometry.translate(0, 0.04, 0)
+      roadGeometries.push(geometry)
 
-      const edge = new THREE.LineSegments(new THREE.EdgesGeometry(geometry), roadEdgeMaterial)
-      edge.position.y = 0.045
-      roadGroup.add(edge)
+      const edge = new THREE.EdgesGeometry(geometry)
+      edge.translate(0, 0.005, 0)
+      roadEdges.push(edge)
     }
+  }
+
+  const mergedRoads = mergeGeometries(roadGeometries, false)
+  if (mergedRoads) roadGroup.add(new THREE.Mesh(mergedRoads, roadMaterial))
+  roadGeometries.forEach((geometry) => geometry.dispose())
+
+  const mergedEdges = mergeGeometries(roadEdges, false)
+  if (mergedEdges) roadGroup.add(new THREE.LineSegments(mergedEdges, roadEdgeMaterial))
+  roadEdges.forEach((geometry) => geometry.dispose())
+}
+
+function tileOrder() {
+  const maxTile = Math.ceil(RADIUS_METERS / TILE_METERS)
+  const size = maxTile * 2 + 1
+
+  return Array.from({ length: size ** 2 }, (_, index) => {
+    const tx = (index % size) - maxTile
+    const ty = Math.floor(index / size) - maxTile
+    return { tx, ty, distance: Math.hypot(tx * TILE_METERS, ty * TILE_METERS) }
+  })
+    .filter((tile) => tile.distance <= RADIUS_METERS + TILE_METERS)
+    .sort((a, b) => a.distance - b.distance || a.ty - b.ty || a.tx - b.tx)
+}
+
+function tileBounds(tile) {
+  const halfTile = TILE_METERS / 2
+  const westMeters = tile.tx * TILE_METERS - halfTile
+  const eastMeters = tile.tx * TILE_METERS + halfTile
+  const southMeters = tile.ty * TILE_METERS - halfTile
+  const northMeters = tile.ty * TILE_METERS + halfTile
+
+  return {
+    west: CENTER.lon + westMeters / METERS_PER_LONGITUDE,
+    south: CENTER.lat + southMeters / METERS_PER_LATITUDE,
+    east: CENTER.lon + eastMeters / METERS_PER_LONGITUDE,
+    north: CENTER.lat + northMeters / METERS_PER_LATITUDE,
   }
 }
 
-function queryLayer(url, fields) {
-  const params = new URLSearchParams({
+async function queryTile(url, fields, label, tile) {
+  const bounds = tileBounds(tile)
+  const baseParams = new URLSearchParams({
     where: '1=1',
-    geometry: `${BOUNDS.west},${BOUNDS.south},${BOUNDS.east},${BOUNDS.north}`,
+    geometry: `${bounds.west},${bounds.south},${bounds.east},${bounds.north}`,
     geometryType: 'esriGeometryEnvelope',
     inSR: '4326',
     spatialRel: 'esriSpatialRelIntersects',
     outFields: fields,
     returnGeometry: 'true',
     outSR: '4326',
-    resultRecordCount: '2000',
+    resultRecordCount: String(PAGE_SIZE),
     f: 'geojson',
   })
 
-  return fetch(`${url}?${params}`).then(async (response) => {
+  const features = []
+  let resultOffset = 0
+
+  for (let page = 0; page < 50; page += 1) {
+    const params = new URLSearchParams(baseParams)
+    params.set('resultOffset', String(resultOffset))
+    const response = await fetch(`${url}?${params}`)
     if (!response.ok) throw new Error(`Request failed (${response.status})`)
+
     const data = await response.json()
     if (data.error) throw new Error(data.error.message || 'The city data service returned an error.')
-    return data
-  })
+
+    const pageFeatures = data.features || []
+    features.push(...pageFeatures)
+    statusMessage.value = `${label} / ${features.length.toLocaleString()} loaded`
+    resultOffset += pageFeatures.length
+
+    const exceededLimit = data.exceededTransferLimit || data.properties?.exceededTransferLimit
+    if (!pageFeatures.length || (!exceededLimit && pageFeatures.length < PAGE_SIZE)) break
+  }
+
+  return { type: 'FeatureCollection', features }
 }
 
 async function loadMapData() {
-  const [buildings, roads] = await Promise.allSettled([
-    queryLayer(BUILDING_LAYER, 'OBJECTID,BUILDINGID,DERIVED_HEIGHT,ELEVATION,SUBTYPE_DESC'),
-    queryLayer(ROAD_LAYER, 'OBJECTID'),
-  ])
+  const tiles = tileOrder()
+  const errors = []
 
-  if (buildings.status === 'fulfilled') addBuildings(buildings.value)
-  else error.value = buildings.reason?.message || 'Unable to load the building outlines.'
+  for (const [index, tile] of tiles.entries()) {
+    const tileLabel = `TILE ${index + 1}/${tiles.length}`
+    statusMessage.value = `${tileLabel} / loading center-out`
+    const [buildings, roads] = await Promise.allSettled([
+      queryTile(BUILDING_LAYER, 'OBJECTID,BUILDINGID,DERIVED_HEIGHT,ELEVATION,SUBTYPE_DESC', `${tileLabel} BUILDINGS`, tile),
+      queryTile(ROAD_LAYER, 'OBJECTID', `${tileLabel} ROADS`, tile),
+    ])
 
-  if (roads.status === 'fulfilled') addRoads(roads.value)
-  else if (!error.value) error.value = roads.reason?.message || 'Unable to load the road layer.'
+    if (buildings.status === 'fulfilled') addBuildings(buildings.value)
+    else errors.push(buildings.reason?.message || `${tileLabel} building request failed`)
+
+    if (roads.status === 'fulfilled') addRoads(roads.value)
+    else errors.push(roads.reason?.message || `${tileLabel} road request failed`)
+  }
+
+  if (errors.length) error.value = `${errors.length} municipal tile request${errors.length === 1 ? '' : 's'} failed.`
 
   loading.value = false
-  statusMessage.value = error.value ? 'Showing available scene layers' : 'Municipal layers loaded'
+  statusMessage.value = error.value ? 'Showing available scene layers' : 'Municipal layers loaded center-out'
 }
 
 function createScene() {
@@ -355,7 +515,7 @@ function createScene() {
   scene.add(keyLight)
 
   const ground = new THREE.Mesh(
-    new THREE.PlaneGeometry(340, 340),
+    new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE),
     new THREE.MeshStandardMaterial({ color: 0x0f1d23, roughness: 1 }),
   )
   ground.rotation.x = -Math.PI / 2
@@ -363,7 +523,7 @@ function createScene() {
   ground.receiveShadow = true
   scene.add(ground)
 
-  const grid = new THREE.GridHelper(340, 34, 0x29434a, 0x1a2b31)
+  const grid = new THREE.GridHelper(MAP_SIZE, 50, 0x29434a, 0x1a2b31)
   grid.position.y = -0.01
   grid.material.transparent = true
   grid.material.opacity = 0.2
@@ -435,7 +595,11 @@ function hitBuilding(event) {
   if (!renderer || !buildingGroup) return null
   updatePointer(event)
   const intersections = raycaster.intersectObjects(buildingGroup.children, true)
-  return intersections.length ? findBuildingObject(intersections[0].object) : null
+  for (const intersection of intersections) {
+    const building = findBuildingObject(intersection.object)
+    if (building) return building
+  }
+  return null
 }
 
 function handlePointerMove(event) {
@@ -513,7 +677,7 @@ onMounted(() => {
   renderer.setSize(viewport.value.clientWidth, viewport.value.clientHeight, false)
   viewport.value.appendChild(renderer.domElement)
 
-  camera = new THREE.PerspectiveCamera(42, viewport.value.clientWidth / viewport.value.clientHeight, 0.1, 900)
+  camera = new THREE.PerspectiveCamera(42, viewport.value.clientWidth / viewport.value.clientHeight, 0.1, 4_000)
   camera.position.set(126, 104, 126)
 
   controls = new OrbitControls(camera, renderer.domElement)
@@ -521,7 +685,7 @@ onMounted(() => {
   controls.enableDamping = true
   controls.dampingFactor = 0.075
   controls.minDistance = 34
-  controls.maxDistance = 300
+  controls.maxDistance = 1_500
   controls.minPolarAngle = 0.25
   controls.maxPolarAngle = Math.PI / 2.02
   controls.enablePan = true
