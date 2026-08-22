@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "check:company-data": "node scripts/check-company-data.mjs",
     "check:geometry": "node scripts/check-building-geometry.mjs",
     "dev": "vite",
     "build": "vite build",
