@@ -400,6 +400,55 @@ button {
   color: rgba(145, 163, 159, 0.62);
 }
 
+.mobile-tutorial {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(7, 14, 18, 0.68);
+  backdrop-filter: blur(7px);
+}
+
+.tutorial-card {
+  position: relative;
+  width: min(100%, 340px);
+  padding: 28px 24px 24px;
+  border: 1px solid rgba(197, 216, 208, 0.25);
+  background: #102027;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  animation: tutorial-in 0.45s ease both;
+}
+
+.tutorial-card .eyebrow { justify-content: center; }
+.tutorial-card h2 { margin: 15px 0 0; color: var(--paper); font-size: 27px; font-weight: 400; letter-spacing: -0.04em; }
+.tutorial-card p:not(.eyebrow) { min-height: 38px; margin: 12px auto 20px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+.tutorial-progress { position: absolute; top: 12px; right: 24px; left: 24px; display: flex; gap: 5px; }
+.tutorial-progress span { height: 2px; flex: 1; background: var(--line); }
+.tutorial-progress span.active { background: var(--accent); }
+.gesture-demo { position: relative; width: 150px; height: 112px; margin: 22px auto 0; }
+.finger { position: absolute; width: 22px; height: 22px; border: 2px solid var(--accent); border-radius: 50%; animation: gesture-pulse 1.6s ease-in-out infinite; }
+.finger-one { top: 45px; left: 40px; }
+.finger-two { top: 45px; left: 88px; animation-delay: .2s; }
+.gesture-line { position: absolute; top: 55px; left: 59px; width: 32px; border-top: 1px dashed var(--muted); }
+.gesture-pan .finger-two { display: none; }
+.gesture-pan .finger-one { left: 64px; animation: gesture-pan 1.6s ease-in-out infinite; }
+.gesture-rotate .finger-one { animation: none; }
+.gesture-rotate .finger-two { animation: gesture-rotate 1.6s ease-in-out infinite; }
+.tutorial-card button { width: 100%; padding: 12px; border: 0; background: var(--accent); color: #1a2020; cursor: pointer; font-size: 10px; font-weight: 700; letter-spacing: .18em; }
+.tutorial-skip { margin-top: 10px; padding: 4px !important; background: transparent !important; color: var(--quiet) !important; }
+
+@keyframes tutorial-in { from { opacity: 0; transform: translateY(12px); } }
+@keyframes gesture-pulse { 50% { box-shadow: 0 0 0 9px rgba(240, 182, 127, .12); } }
+@keyframes gesture-pan { 50% { transform: translateX(35px); } }
+@keyframes gesture-rotate { 50% { transform: translate(8px, -25px); } }
+
+@media (min-width: 801px), (pointer: fine) {
+  .mobile-tutorial { display: none; }
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }

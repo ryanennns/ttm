@@ -21,6 +21,28 @@
       </div>
     </div>
 
+    <section v-if="showMobileTutorial" class="mobile-tutorial" aria-labelledby="tutorial-title">
+      <div class="tutorial-card">
+        <div class="tutorial-progress" aria-hidden="true">
+          <span v-for="(_, index) in tutorialSteps" :key="index" :class="{ active: index === tutorialStep }"></span>
+        </div>
+        <p class="eyebrow"><span></span> TOUCH CONTROLS</p>
+        <h2 id="tutorial-title">{{ tutorialSteps[tutorialStep].title }}</h2>
+        <div class="gesture-demo" :class="`gesture-${tutorialSteps[tutorialStep].gesture}`" aria-hidden="true">
+          <i class="finger finger-one"></i>
+          <i class="finger finger-two"></i>
+          <span class="gesture-line"></span>
+        </div>
+        <p>{{ tutorialSteps[tutorialStep].description }}</p>
+        <button type="button" @click="advanceTutorial">
+          {{ tutorialStep === tutorialSteps.length - 1 ? 'GOT IT' : 'NEXT' }}
+        </button>
+        <button v-if="tutorialStep < tutorialSteps.length - 1" class="tutorial-skip" type="button" @click="dismissTutorial">
+          SKIP
+        </button>
+      </div>
+    </section>
+
     <header class="topbar">
       <div class="brand-lockup">
         <div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -77,6 +99,13 @@ const viewport = ref(null)
 const loading = ref(true)
 const error = ref('')
 const statusMessage = ref('Connecting to Toronto municipal data…')
+const showMobileTutorial = ref(false)
+const tutorialStep = ref(0)
+const tutorialSteps = [
+  { title: 'Zoom the city', description: 'Pinch or stretch with two fingers to zoom in and out.', gesture: 'zoom' },
+  { title: 'Pan the camera', description: 'Drag with one finger to move across the city.', gesture: 'pan' },
+  { title: 'Rotate the view', description: 'Keep one finger still and move the other to rotate the camera.', gesture: 'rotate' },
+]
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
 const RADIUS_METERS = 2_500
@@ -456,7 +485,18 @@ function resetTwoFingerTouch() {
   controls.enableRotate = true
 }
 
+function dismissTutorial() {
+  showMobileTutorial.value = false
+  localStorage.setItem('toronto-tech-map-mobile-tutorial-seen', '1')
+}
+
+function advanceTutorial() {
+  if (tutorialStep.value === tutorialSteps.length - 1) dismissTutorial()
+  else tutorialStep.value += 1
+}
+
 onMounted(() => {
+  showMobileTutorial.value = window.matchMedia('(pointer: coarse)').matches && !localStorage.getItem('toronto-tech-map-mobile-tutorial-seen')
   createScene()
 
   renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' })
