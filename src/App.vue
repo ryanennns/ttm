@@ -496,7 +496,7 @@ function handleTouchPointer(event) {
   touchPositions.set(event.pointerId, { x: event.pageX, y: event.pageY })
   touchMovement.set(event.pointerId, moved)
   if (!twoFingerMode) {
-    if (moved < 2 || otherMoved < 2) return
+    if (moved < 2 && otherMoved < 2) return
     twoFingerMode = otherMoved >= 2 && moved >= 2 && Math.abs(distance - previousDistance) > 2 ? 'zoom' : 'rotate'
   }
 
