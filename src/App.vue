@@ -497,7 +497,7 @@ function handleTouchPointer(event) {
   touchMovement.set(event.pointerId, moved)
   if (!twoFingerMode) {
     if (moved < 2 && otherMoved < 2) return
-    twoFingerMode = Math.abs(distance - previousDistance) > 2 ? 'zoom' : 'rotate'
+    twoFingerMode = otherMoved >= 2 && moved >= 2 && Math.abs(distance - previousDistance) > 2 ? 'zoom' : 'rotate'
   }
 
   controls._trackPointer(event)
