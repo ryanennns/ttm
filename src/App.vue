@@ -82,6 +82,20 @@
       <span><strong>SCROLL</strong> TO ZOOM</span>
     </div>
 
+    <input
+      v-model.number="zoomRate"
+      class="zoom-slider"
+      type="range"
+      min="-1"
+      max="1"
+      step="0.01"
+      aria-label="Zoom speed"
+      @pointerup="resetZoom"
+      @pointercancel="resetZoom"
+      @keyup="resetZoom"
+      @blur="resetZoom"
+    />
+
     <footer class="footer-bar">
       <span>BUILD 001&nbsp; / &nbsp;BAY—ADELAIDE NODE</span>
       <span class="footer-right">BUILDING OUTLINES + HEIGHT ATTRIBUTES&nbsp; / &nbsp;2026</span>
@@ -102,6 +116,7 @@ const error = ref('')
 const statusMessage = ref('Connecting to Toronto municipal data…')
 const showMobileTutorial = ref(false)
 const tutorialStep = ref(0)
+const zoomRate = ref(0)
 const tutorialSteps = [
   { title: 'Zoom the city', description: 'Pinch or stretch with two fingers to zoom in and out.', gesture: 'zoom' },
   { title: 'Pan the camera', description: 'Drag with one finger to move across the city.', gesture: 'pan' },
@@ -452,6 +467,14 @@ function resizeScene() {
 function animate() {
   animationFrame = requestAnimationFrame(animate)
   const delta = clock.getDelta()
+  if (zoomRate.value && camera && controls) {
+    const distance = THREE.MathUtils.clamp(
+      controls.getDistance() * Math.exp(-zoomRate.value * delta * 2),
+      controls.minDistance,
+      controls.maxDistance,
+    )
+    camera.position.sub(controls.target).setLength(distance).add(controls.target)
+  }
   controls?.update()
 
   if (renderer && camera) renderer.render(scene, camera)
@@ -462,6 +485,10 @@ function animate() {
       document.documentElement.style.setProperty('--camera-height', `${Math.round(camera.position.y)}px`)
     }
   }
+}
+
+function resetZoom() {
+  zoomRate.value = 0
 }
 
 function handleTouchPointer(event) {
