@@ -3,10 +3,7 @@
     <div
       ref="viewport"
       class="viewport"
-      :class="{ 'is-loading': loading, 'is-hovering': isHovering }"
-      @pointermove="handlePointerMove"
-      @pointerleave="handlePointerLeave"
-      @click="handleViewportClick"
+      :class="{ 'is-loading': loading }"
     >
       <div class="viewport-wash"></div>
 
@@ -83,16 +80,6 @@
       </div>
     </aside>
 
-    <aside v-if="selectedBuilding" class="selection-card panel">
-      <div class="panel-kicker"><span>SELECTED MASSING</span><span class="selection-id">ID {{ selectedBuilding.id }}</span></div>
-      <h2>Building outline</h2>
-      <div class="selection-details">
-        <div><span>HEIGHT</span><strong>{{ selectedBuilding.height }} m</strong></div>
-        <div><span>BASE ELEVATION</span><strong>{{ selectedBuilding.elevation }} m</strong></div>
-      </div>
-      <p>{{ selectedBuilding.type }}</p>
-    </aside>
-
     <aside class="legend-card panel">
       <div class="panel-kicker"><span>VERTICAL SCALE</span><span>METRES</span></div>
       <div class="legend-bar"><i></i><i></i><i></i><i></i><i></i></div>
@@ -136,12 +123,9 @@ const error = ref('')
 const statusMessage = ref('Connecting to Toronto municipal data…')
 const buildingCount = ref(0)
 const tallest = ref(0)
-const selectedBuilding = ref(null)
-const isHovering = ref(false)
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
 const RADIUS_METERS = 2_500
-const PICK_RADIUS_METERS = 500
 const TILE_METERS = 750
 // ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
 const GROUND_ELEVATION = 80
@@ -166,15 +150,10 @@ let animationFrame
 let marker
 let buildingGroup
 let roadGroup
-let selectionOutline
-let hoveredObject
-let selectedObject
 let lastStatusUpdate = 0
 const seenBuildingIds = new Set()
 const seenRoadIds = new Set()
 
-const pointer = new THREE.Vector2()
-const raycaster = new THREE.Raycaster()
 const clock = new THREE.Clock()
 
 const structureCount = computed(() => (buildingCount.value ? String(buildingCount.value).padStart(3, '0') : '—'))
@@ -259,19 +238,7 @@ function getHeight(properties) {
   return Number.isFinite(derivedHeight) && derivedHeight > 0 ? Math.min(derivedHeight, 350) : 8
 }
 
-function getFeatureInfo(feature, baseElevation) {
-  const properties = feature.properties || {}
-  const height = getHeight(properties)
-  const elevation = Number(properties.ELEVATION)
-  return {
-    id: properties.BUILDINGID || properties.OBJECTID || '—',
-    height,
-    elevation: Number.isFinite(elevation) ? Math.round(elevation - baseElevation) : 0,
-    type: properties.SUBTYPE_DESC || 'Municipal building outline',
-  }
-}
-
-function featureGeometries(feature, info, baseElevation) {
+function featureGeometries(feature, height, baseElevation) {
   const baseY = Math.max(0, (Number(feature.properties?.ELEVATION) - baseElevation) * SCALE)
   const parts = []
 
@@ -280,7 +247,7 @@ function featureGeometries(feature, info, baseElevation) {
     if (!shape) continue
 
     const geometry = new THREE.ExtrudeGeometry(shape, {
-      depth: info.height * SCALE,
+      depth: height * SCALE,
       bevelEnabled: false,
       steps: 1,
       curveSegments: 1,
@@ -309,27 +276,11 @@ function addBuildings(collection) {
   const mergedParts = new Map()
 
   for (const feature of features) {
-    const info = getFeatureInfo(feature, GROUND_ELEVATION)
-    const parts = featureGeometries(feature, info, GROUND_ELEVATION)
-    const isPickable = featureDistanceMeters(feature) <= PICK_RADIUS_METERS
-
-    if (isPickable) {
-      const group = new THREE.Group()
-      group.userData.building = info
-      group.name = `building-${info.id}`
-      for (const geometry of parts) {
-        const mesh = new THREE.Mesh(geometry, getMaterialPair(info.height))
-        mesh.userData.building = info
-        mesh.castShadow = false
-        mesh.receiveShadow = true
-        group.add(mesh)
-      }
-      if (group.children.length) buildingGroup.add(group)
-    } else {
-      const bucket = materialBucket(info.height)
-      if (!mergedParts.has(bucket)) mergedParts.set(bucket, [])
-      mergedParts.get(bucket).push(...parts)
-    }
+    const height = getHeight(feature.properties)
+    const parts = featureGeometries(feature, height, GROUND_ELEVATION)
+    const bucket = materialBucket(height)
+    if (!mergedParts.has(bucket)) mergedParts.set(bucket, [])
+    mergedParts.get(bucket).push(...parts)
   }
 
   for (const [bucket, geometries] of mergedParts) {
@@ -563,77 +514,11 @@ function resizeScene() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 }
 
-function findBuildingObject(object) {
-  let current = object
-  while (current) {
-    if (current.userData?.building) return current
-    current = current.parent
-  }
-  return null
-}
-
-function updatePointer(event) {
-  const bounds = renderer.domElement.getBoundingClientRect()
-  pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1
-  pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1
-  raycaster.setFromCamera(pointer, camera)
-}
-
-function hitBuilding(event) {
-  if (!renderer || !buildingGroup) return null
-  updatePointer(event)
-  const intersections = raycaster.intersectObjects(buildingGroup.children, true)
-  for (const intersection of intersections) {
-    const building = findBuildingObject(intersection.object)
-    if (building) return building
-  }
-  return null
-}
-
-function handlePointerMove(event) {
-  const hit = hitBuilding(event)
-  hoveredObject = hit
-  isHovering.value = Boolean(hit)
-}
-
-function handlePointerLeave() {
-  hoveredObject = null
-  isHovering.value = false
-}
-
-function clearSelectionOutline() {
-  if (selectionOutline?.parent) selectionOutline.parent.remove(selectionOutline)
-  selectionOutline?.geometry.dispose()
-  selectionOutline?.material.dispose()
-  selectionOutline = null
-}
-
-function selectBuilding(object) {
-  clearSelectionOutline()
-  selectedObject = object
-  selectedBuilding.value = object?.userData.building || null
-  if (!object || !object.isMesh) return
-
-  selectionOutline = new THREE.LineSegments(
-    new THREE.EdgesGeometry(object.geometry, 18),
-    new THREE.LineBasicMaterial({ color: 0xf4c69a, transparent: true, opacity: 0.95 }),
-  )
-  selectionOutline.scale.setScalar(1.002)
-  object.add(selectionOutline)
-}
-
-function handleViewportClick(event) {
-  if (loading.value) return
-  const hit = hitBuilding(event)
-  selectBuilding(hit)
-}
-
 function resetView() {
   if (!camera || !controls) return
   camera.position.set(126, 104, 126)
   controls.target.set(0, 0, 0)
   controls.update()
-  selectBuilding(null)
 }
 
 function animate() {
@@ -688,7 +573,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   cancelAnimationFrame(animationFrame)
   window.removeEventListener('resize', resizeScene)
-  clearSelectionOutline()
   controls?.dispose()
   renderer?.dispose()
 })
