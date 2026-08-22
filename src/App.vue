@@ -126,6 +126,7 @@ const tallest = ref(0)
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
 const RADIUS_METERS = 2_500
+const INDIVIDUAL_RENDER_RADIUS_METERS = 500
 const TILE_METERS = 750
 // ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
 const GROUND_ELEVATION = 80
@@ -278,6 +279,18 @@ function addBuildings(collection) {
   for (const feature of features) {
     const height = getHeight(feature.properties)
     const parts = featureGeometries(feature, height, GROUND_ELEVATION)
+    const isNearCenter = featureDistanceMeters(feature) <= INDIVIDUAL_RENDER_RADIUS_METERS
+
+    if (isNearCenter) {
+      for (const geometry of parts) {
+        const mesh = new THREE.Mesh(geometry, getMaterialPair(height))
+        mesh.castShadow = false
+        mesh.receiveShadow = true
+        buildingGroup.add(mesh)
+      }
+      continue
+    }
+
     const bucket = materialBucket(height)
     if (!mergedParts.has(bucket)) mergedParts.set(bucket, [])
     mergedParts.get(bucket).push(...parts)
