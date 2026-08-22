@@ -357,15 +357,8 @@ function addRoads(collection) {
     // Road polygons overlap at intersections; avoid coplanar fragments fighting in the depth buffer.
     depthWrite: false,
   })
-  const roadEdgeMaterial = new THREE.LineBasicMaterial({
-    color: 0x385057,
-    transparent: true,
-    opacity: 0.38,
-    depthWrite: false,
-  })
 
   const roadGeometries = []
-  const roadEdges = []
 
   for (const feature of collection.features || []) {
     const id = feature.properties?.OBJECTID
@@ -380,20 +373,12 @@ function addRoads(collection) {
       geometry.rotateX(-Math.PI / 2)
       geometry.translate(0, 0.04, 0)
       roadGeometries.push(geometry)
-
-      const edge = new THREE.EdgesGeometry(geometry)
-      edge.translate(0, 0.005, 0)
-      roadEdges.push(edge)
     }
   }
 
   const mergedRoads = roadGeometries.length ? mergeGeometries(roadGeometries, false) : null
   if (mergedRoads) roadGroup.add(new THREE.Mesh(mergedRoads, roadMaterial))
   roadGeometries.forEach((geometry) => geometry.dispose())
-
-  const mergedEdges = roadEdges.length ? mergeGeometries(roadEdges, false) : null
-  if (mergedEdges) roadGroup.add(new THREE.LineSegments(mergedEdges, roadEdgeMaterial))
-  roadEdges.forEach((geometry) => geometry.dispose())
 }
 
 function tileOrder() {
