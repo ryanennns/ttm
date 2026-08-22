@@ -104,6 +104,8 @@ let animationFrame
 let buildingGroup
 let roadGroup
 let lastStatusUpdate = 0
+const touchPositions = new Map()
+const touchMovement = new Map()
 const seenBuildingIds = new Set()
 const seenRoadIds = new Set()
 
@@ -431,6 +433,42 @@ function animate() {
   }
 }
 
+function handleTouchPointer(event) {
+  if (event.pointerType !== 'touch') return
+
+  if (event.type === 'pointerdown') {
+    touchPositions.set(event.pointerId, { x: event.pageX, y: event.pageY })
+    touchMovement.set(event.pointerId, 0)
+    return
+  }
+
+  if (event.type === 'pointerup' || event.type === 'pointercancel') {
+    touchPositions.delete(event.pointerId)
+    touchMovement.delete(event.pointerId)
+    return
+  }
+
+  if (event.pointerType !== 'touch' || touchPositions.size !== 2) return
+
+  const previous = touchPositions.get(event.pointerId)
+  const otherEntry = [...touchPositions].find(([id]) => id !== event.pointerId)
+  const other = otherEntry?.[1]
+  if (!previous || !other) return
+
+  const moved = Math.hypot(event.pageX - previous.x, event.pageY - previous.y)
+  const otherMoved = touchMovement.get(otherEntry[0]) || 0
+  const distance = Math.hypot(event.pageX - other.x, event.pageY - other.y)
+  const previousDistance = Math.hypot(previous.x - other.x, previous.y - other.y)
+
+  touchPositions.set(event.pointerId, { x: event.pageX, y: event.pageY })
+  touchMovement.set(event.pointerId, moved)
+  controls._trackPointer(event)
+  event.stopImmediatePropagation()
+  if (otherMoved >= 2 && moved >= 2 && Math.abs(distance - previousDistance) > 2) controls._handleTouchMoveDolly(event)
+  else controls._handleTouchMoveRotate(event)
+  controls.update()
+}
+
 onMounted(() => {
   createScene()
 
@@ -465,6 +503,11 @@ onMounted(() => {
   controls.screenSpacePanning = false
   controls.update()
 
+  renderer.domElement.addEventListener('pointerdown', handleTouchPointer, { capture: true })
+  renderer.domElement.addEventListener('pointermove', handleTouchPointer, { capture: true })
+  renderer.domElement.addEventListener('pointerup', handleTouchPointer, { capture: true })
+  renderer.domElement.addEventListener('pointercancel', handleTouchPointer, { capture: true })
+
   window.addEventListener('resize', resizeScene)
   animate()
   loadMapData()
@@ -474,6 +517,10 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationFrame)
   window.removeEventListener('resize', resizeScene)
   controls?.dispose()
+  renderer?.domElement.removeEventListener('pointerdown', handleTouchPointer, { capture: true })
+  renderer?.domElement.removeEventListener('pointermove', handleTouchPointer, { capture: true })
+  renderer?.domElement.removeEventListener('pointerup', handleTouchPointer, { capture: true })
+  renderer?.domElement.removeEventListener('pointercancel', handleTouchPointer, { capture: true })
   renderer?.dispose()
 })
 </script>
