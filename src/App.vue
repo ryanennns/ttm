@@ -141,7 +141,7 @@ const ROAD_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x0d171d)
-scene.fog = new THREE.Fog(0x0d171d, 700, 2_600)
+scene.fog = new THREE.Fog(0x000000, 1_000 * SCALE, RADIUS_METERS * SCALE)
 
 let renderer
 let camera
