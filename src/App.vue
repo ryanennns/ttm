@@ -161,7 +161,6 @@ const sceneCompanies = selectCompanyRecords(companyData, {
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x0d171d)
-scene.fog = new THREE.Fog(0x000000, 1_000 * SCALE, RADIUS_METERS * SCALE)
 
 let renderer
 let camera
