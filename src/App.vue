@@ -296,6 +296,9 @@ function featureGeometries(feature, info, baseElevation) {
 function addBuildings(collection) {
   const features = (collection.features || []).filter(
     (feature) => {
+      // City record 152523 is an oversized 295 m complex envelope; the source has the accurate tower footprint separately.
+      if (feature.properties?.OBJECTID === 152523) return false
+
       const id = feature.properties?.OBJECTID || feature.properties?.BUILDINGID
       if (!id || seenBuildingIds.has(id)) return false
       seenBuildingIds.add(id)
@@ -488,6 +491,8 @@ async function loadMapData() {
 
     if (roads.status === 'fulfilled') addRoads(roads.value)
     else errors.push(roads.reason?.message || `${tileLabel} road request failed`)
+
+    await new Promise((resolve) => requestAnimationFrame(resolve))
   }
 
   if (errors.length) error.value = `${errors.length} municipal tile request${errors.length === 1 ? '' : 's'} failed.`
