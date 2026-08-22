@@ -46,50 +46,6 @@
       </p>
     </section>
 
-    <aside class="focus-card panel">
-      <div class="panel-kicker">
-        <span>FOCUS POINT</span>
-        <button class="text-button" type="button" @click.stop="resetView">RESET VIEW</button>
-      </div>
-      <div class="focus-title-row">
-        <div class="location-pin">+</div>
-        <div>
-          <h2>Bay <span>/</span> Adelaide</h2>
-          <p>Toronto, Ontario</p>
-        </div>
-      </div>
-      <div class="coordinate-line">43°39′00.3″ N &nbsp;·&nbsp; 79°22′50.7″ W</div>
-      <div class="panel-rule"></div>
-      <div class="stats-grid">
-        <div>
-          <span>STRUCTURES</span>
-          <strong>{{ structureCount }}</strong>
-        </div>
-        <div>
-          <span>TALLEST MASS</span>
-          <strong>{{ tallestHeight }}<small v-if="tallestHeight !== '—'"> m</small></strong>
-        </div>
-        <div>
-          <span>STUDY AREA</span>
-          <strong>{{ studyArea }}</strong>
-        </div>
-        <div>
-          <span>HEIGHT SOURCE</span>
-          <strong>DERIVED</strong>
-        </div>
-      </div>
-    </aside>
-
-    <aside class="legend-card panel">
-      <div class="panel-kicker"><span>VERTICAL SCALE</span><span>METRES</span></div>
-      <div class="legend-bar"><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="legend-labels"><span>LOW</span><span>HIGH</span></div>
-      <div class="legend-source">
-        <span class="source-dot"></span>
-        <span>CITY OF TORONTO / 3D MASSING</span>
-      </div>
-    </aside>
-
     <div class="compass" aria-label="North is up">
       <span class="compass-north">N</span>
       <span class="compass-cross vertical"></span>
@@ -121,8 +77,6 @@ const viewport = ref(null)
 const loading = ref(true)
 const error = ref('')
 const statusMessage = ref('Connecting to Toronto municipal data…')
-const buildingCount = ref(0)
-const tallest = ref(0)
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
 const RADIUS_METERS = 2_500
@@ -147,7 +101,6 @@ let renderer
 let camera
 let controls
 let animationFrame
-let marker
 let buildingGroup
 let roadGroup
 let lastStatusUpdate = 0
@@ -156,9 +109,6 @@ const seenRoadIds = new Set()
 
 const clock = new THREE.Clock()
 
-const structureCount = computed(() => (buildingCount.value ? String(buildingCount.value).padStart(3, '0') : '—'))
-const tallestHeight = computed(() => (tallest.value ? String(Math.round(tallest.value)) : '—'))
-const studyArea = computed(() => `${((Math.PI * RADIUS_METERS ** 2) / 1_000_000).toFixed(1)} km²`)
 const statusLabel = computed(() => (error.value ? 'SOURCE OFFLINE' : loading.value ? 'SYNCING DATA' : 'LIVE DATA'))
 
 const colorPalette = [0x6e9697, 0x7f9a9a, 0xb18c6b, 0x8b7c83, 0x63818c]
@@ -281,8 +231,6 @@ function addBuildings(collection) {
     }
   }
 
-  buildingCount.value += features.length
-  tallest.value = features.reduce((max, feature) => Math.max(max, getHeight(feature.properties)), tallest.value)
 }
 
 function addRoads(collection) {
@@ -457,37 +405,6 @@ function createScene() {
   buildingGroup = new THREE.Group()
   scene.add(roadGroup, buildingGroup)
 
-  marker = new THREE.Group()
-  const markerRing = new THREE.Mesh(
-    new THREE.RingGeometry(3.8, 4.25, 6),
-    new THREE.MeshBasicMaterial({ color: 0xf0b67f, transparent: true, opacity: 0.92, side: THREE.DoubleSide }),
-  )
-  markerRing.rotation.x = -Math.PI / 2
-  markerRing.position.y = 0.18
-  marker.add(markerRing)
-
-  const markerDot = new THREE.Mesh(
-    new THREE.CircleGeometry(1.35, 6),
-    new THREE.MeshBasicMaterial({ color: 0xf0b67f, transparent: true, opacity: 0.22, side: THREE.DoubleSide }),
-  )
-  markerDot.rotation.x = -Math.PI / 2
-  markerDot.position.y = 0.17
-  marker.add(markerDot)
-
-  const markerStem = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.18, 0.18, 7.8, 6),
-    new THREE.MeshBasicMaterial({ color: 0xf0b67f, transparent: true, opacity: 0.72 }),
-  )
-  markerStem.position.y = 3.9
-  marker.add(markerStem)
-
-  const markerHead = new THREE.Mesh(
-    new THREE.OctahedronGeometry(1.05, 0),
-    new THREE.MeshStandardMaterial({ color: 0xf0b67f, emissive: 0x5c2e1a, emissiveIntensity: 0.4, flatShading: true }),
-  )
-  markerHead.position.y = 8.1
-  marker.add(markerHead)
-  scene.add(marker)
 }
 
 function resizeScene() {
@@ -499,22 +416,10 @@ function resizeScene() {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 }
 
-function resetView() {
-  if (!camera || !controls) return
-  camera.position.set(126, 104, 126)
-  controls.target.set(0, 0, 0)
-  controls.update()
-}
-
 function animate() {
   animationFrame = requestAnimationFrame(animate)
   const delta = clock.getDelta()
   controls?.update()
-
-  if (marker) {
-    marker.rotation.y += delta * 0.28
-    marker.children[0].material.opacity = 0.72 + Math.sin(clock.elapsedTime * 2.1) * 0.18
-  }
 
   if (renderer && camera) renderer.render(scene, camera)
 
