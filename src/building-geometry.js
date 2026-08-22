@@ -74,7 +74,12 @@ export function selectBuildingFeatures(features, { getHeight, polygonSets, meter
         && feature.properties.BUILDINGID === other.properties?.BUILDINGID
       const otherHeight = getHeight(other.properties)
 
-      if (sameBuilding && otherHeight >= height + 5 && otherMetrics.area < featureMetrics.area) return true
+      if (
+        sameBuilding
+        && otherMetrics.area < featureMetrics.area
+        && (otherHeight >= height + 5
+          || (otherHeight >= height - 2 && pointInRing(otherMetrics.center, featureMetrics.ring)))
+      ) return true
 
       return !sameBuilding
         && otherHeight >= height - 2
