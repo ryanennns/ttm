@@ -518,7 +518,7 @@ function createScene() {
 
   const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(MAP_SIZE, MAP_SIZE),
-    new THREE.MeshStandardMaterial({ color: 0x0f1d23, roughness: 1 }),
+    new THREE.MeshStandardMaterial({ color: 0x0f1d23, roughness: 1, depthWrite: false }),
   )
   ground.rotation.x = -Math.PI / 2
   ground.position.y = -0.02
@@ -529,6 +529,7 @@ function createScene() {
   grid.position.y = -0.01
   grid.material.transparent = true
   grid.material.opacity = 0.2
+  grid.material.depthWrite = false
   scene.add(grid)
 
   roadGroup = new THREE.Group()
