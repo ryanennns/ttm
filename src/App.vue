@@ -150,6 +150,8 @@ const METERS_PER_LATITUDE = 111_320
 const METERS_PER_LONGITUDE = METERS_PER_LATITUDE * Math.cos((CENTER.lat * Math.PI) / 180)
 const MAP_SIZE = RADIUS_METERS * SCALE * 2 + 100
 const PAGE_SIZE = 2_000
+const REQUEST_TIMEOUT_MS = 15_000
+const REQUEST_RETRIES = 1
 const BUILDING_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/2/query'
 const ROAD_LAYER = 'https://gis.toronto.ca/arcgis/rest/services/cot_geospatial3/FeatureServer/3/query'
 
@@ -214,19 +216,12 @@ function pathFromRing(ring) {
   })
 }
 
-function shapeFromRings(rings, inset = 1) {
+function shapeFromRings(rings) {
   if (!rings?.[0]?.length) return null
 
-  const outer = pathFromRing(rings[0])
-  const center = outer.reduce(
-    (sum, point) => sum.add(point),
-    new THREE.Vector2(),
-  ).multiplyScalar(1 / outer.length)
-  const scalePoint = (point) => center.clone().add(point.clone().sub(center).multiplyScalar(inset))
-
-  const shape = new THREE.Shape(outer.map(scalePoint))
+  const shape = new THREE.Shape(pathFromRing(rings[0]))
   for (const hole of rings.slice(1)) {
-    if (hole.length) shape.holes.push(new THREE.Path(pathFromRing(hole).map(scalePoint)))
+    if (hole.length) shape.holes.push(new THREE.Path(pathFromRing(hole)))
   }
   return shape
 }
@@ -276,48 +271,23 @@ function getFeatureInfo(feature, baseElevation) {
   }
 }
 
-function buildingTiers(height) {
-  if (height < 18) return [{ inset: 1, bottom: 0, top: height }]
-  if (height < 55) {
-    return [
-      { inset: 1, bottom: 0, top: height * 0.82 },
-      { inset: 0.9, bottom: height * 0.82, top: height },
-    ]
-  }
-  if (height < 120) {
-    return [
-      { inset: 1, bottom: 0, top: height * 0.2 },
-      { inset: 0.94, bottom: height * 0.2, top: height * 0.78 },
-      { inset: 0.78, bottom: height * 0.78, top: height },
-    ]
-  }
-  return [
-    { inset: 1, bottom: 0, top: height * 0.18 },
-    { inset: 0.95, bottom: height * 0.18, top: height * 0.72 },
-    { inset: 0.82, bottom: height * 0.72, top: height * 0.9 },
-    { inset: 0.64, bottom: height * 0.9, top: height },
-  ]
-}
-
 function featureGeometries(feature, info, baseElevation) {
   const baseY = Math.max(0, (Number(feature.properties?.ELEVATION) - baseElevation) * SCALE)
   const parts = []
 
   for (const rings of polygonSets(feature.geometry)) {
-    for (const tier of buildingTiers(info.height)) {
-      const shape = shapeFromRings(rings, tier.inset)
-      if (!shape) continue
+    const shape = shapeFromRings(rings)
+    if (!shape) continue
 
-      const geometry = new THREE.ExtrudeGeometry(shape, {
-        depth: (tier.top - tier.bottom) * SCALE,
-        bevelEnabled: false,
-        steps: 1,
-        curveSegments: 1,
-      })
-      geometry.rotateX(-Math.PI / 2)
-      geometry.translate(0, baseY + tier.bottom * SCALE, 0)
-      parts.push(geometry)
-    }
+    const geometry = new THREE.ExtrudeGeometry(shape, {
+      depth: info.height * SCALE,
+      bevelEnabled: false,
+      steps: 1,
+      curveSegments: 1,
+    })
+    geometry.rotateX(-Math.PI / 2)
+    geometry.translate(0, baseY, 0)
+    parts.push(geometry)
   }
 
   return parts
@@ -464,10 +434,7 @@ async function queryTile(url, fields, label, tile) {
   for (let page = 0; page < 50; page += 1) {
     const params = new URLSearchParams(baseParams)
     params.set('resultOffset', String(resultOffset))
-    const response = await fetch(`${url}?${params}`)
-    if (!response.ok) throw new Error(`Request failed (${response.status})`)
-
-    const data = await response.json()
+    const data = await requestJson(`${url}?${params}`, label)
     if (data.error) throw new Error(data.error.message || 'The city data service returned an error.')
 
     const pageFeatures = data.features || []
@@ -480,6 +447,28 @@ async function queryTile(url, fields, label, tile) {
   }
 
   return { type: 'FeatureCollection', features }
+}
+
+async function requestJson(url, label) {
+  for (let attempt = 0; attempt <= REQUEST_RETRIES; attempt += 1) {
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+
+    try {
+      const response = await fetch(url, { signal: controller.signal })
+      if (!response.ok) throw new Error(`Request failed (${response.status})`)
+      return await response.json()
+    } catch (requestError) {
+      if (attempt === REQUEST_RETRIES) {
+        const reason = requestError.name === 'AbortError' ? 'timed out' : requestError.message
+        throw new Error(`${label} ${reason}`)
+      }
+      statusMessage.value = `${label} / retrying`
+      await new Promise((resolve) => setTimeout(resolve, 300))
+    } finally {
+      clearTimeout(timeout)
+    }
+  }
 }
 
 async function loadMapData() {
