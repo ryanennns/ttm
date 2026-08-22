@@ -1,0 +1,2576 @@
+[
+  {
+    "name": "1Password",
+    "address": "49 Spadina Ave, Suite 303, Toronto, ON M5V2J1, CA",
+    "lat": 43.643462,
+    "lng": -79.3936683
+  },
+  {
+    "name": "3 commas",
+    "address": "240 Richmond St W, Toronto, Ontario M5V, CA",
+    "lat": 43.6497141,
+    "lng": -79.38887799999999
+  },
+  {
+    "name": "3dEYE",
+    "address": "1 Yonge Street, Suite 1801, Toronto, Ontario, Canada, M5E 1W7",
+    "lat": 43.6424459,
+    "lng": -79.37455380000002
+  },
+  {
+    "name": "4Five",
+    "address": "175 Bloor St E, Suite 200, Toronto, Ontario M4W 3R8, CA",
+    "lat": 43.6707052,
+    "lng": -79.3825177
+  },
+  {
+    "name": "6ix",
+    "address": "1200 Bay St, Toronto, ON M5R 2A5, CA",
+    "lat": 43.6699255,
+    "lng": -79.3899301
+  },
+  {
+    "name": "Aareas Interactive",
+    "address": "1120 Finch Avenue West, Suite 300, Toronto, Ontario M3J 3H7, CA",
+    "lat": 43.76817940000001,
+    "lng": -79.47514439999999
+  },
+  {
+    "name": "Absolute E",
+    "address": "99 Selkirk Dr, Richmond Hill, Ontario L4B4S4, CA",
+    "lat": 43.846553199999995,
+    "lng": -79.42311389999999
+  },
+  {
+    "name": "ACD labs",
+    "address": "8 King Street East, Suite 107, Toronto, Ontario M5C 1B5 Canada",
+    "lat": 43.6493933,
+    "lng": -79.3777186
+  },
+  {
+    "name": "Ace Pos Solutions",
+    "address": "3600 Steeles Ave E, Suite B109, Markham, Ontario Canada  L3R 9Z7",
+    "lat": 43.818377999999996,
+    "lng": -79.3342054
+  },
+  {
+    "name": "actiTIME",
+    "address": "1881 Steeles Ave. West, Suite# 136, Toronto, Ontario M3H 0A1 Canada",
+    "lat": 43.786408699999996,
+    "lng": -79.4688486
+  },
+  {
+    "name": "Acutenet",
+    "address": "170 Attwell Drive, Suite 650, Toronto, Ontario, M9W 5Z5, Canada",
+    "lat": 43.6883777,
+    "lng": -79.5887382
+  },
+  {
+    "name": "ACV Auctions",
+    "address": "20 Richmond Street East, Suite 600, Toronto, ON, Ontario M5C2R9, CA",
+    "lat": 43.6520392,
+    "lng": -79.3782613
+  },
+  {
+    "name": "Ada Support",
+    "address": "96 Spadina Ave, Unit 801, Toronto, ON, M5V 2J6",
+    "lat": 43.646367999999995,
+    "lng": -79.395915
+  },
+  {
+    "name": "AdLuge",
+    "address": "1444 Dupont Street, Toronto, Canada M6P 4H3, CA",
+    "lat": 43.6661862,
+    "lng": -79.4498406
+  },
+  {
+    "name": "ADSTRA Systems",
+    "address": "55 St. Clair Ave. W., Suite 204, Toronto, ON   M4V 2Y7",
+    "lat": 43.687233299999995,
+    "lng": -79.3966641
+  },
+  {
+    "name": "Adtailor",
+    "address": "80 Cumberland st. Toronto on M5R3V1 Canada",
+    "lat": 43.670628199999996,
+    "lng": -79.3903517
+  },
+  {
+    "name": "Advanced Utility Systems",
+    "address": "2235 Sheppard Avenue East, Suite 1400, Toronto, Ontario, Canada M2J 5B5",
+    "lat": 43.7726264,
+    "lng": -79.3283761
+  },
+  {
+    "name": "Advancepro Technologies",
+    "address": "1110 Finch Ave. West, Suite 814, North York, On Canada M3J 3J4",
+    "lat": 43.7686316,
+    "lng": -79.4743435
+  },
+  {
+    "name": "AdvisorStream",
+    "address": "700-36 Lombard Street, Toronto, ON M5C 2X3",
+    "lat": 43.651778199999995,
+    "lng": -79.3762757
+  },
+  {
+    "name": "Adyen",
+    "address": "240 Richmond St W, Toronto, Ontario ON M5V 2C5, CA",
+    "lat": 43.6497141,
+    "lng": -79.38887799999999
+  },
+  {
+    "name": "AedoAI",
+    "address": "Toronto, ON",
+    "lat": 43.6548046,
+    "lng": -79.3883031
+  },
+  {
+    "name": "AgencyAnalytics",
+    "address": "712-388 Richmond St W, Toronto, Ontario M5V 3P1, CA",
+    "lat": 43.6458112,
+    "lng": -79.4077123
+  },
+  {
+    "name": "Aidaluu",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Akira by Telus Health",
+    "address": "25 York Street, Toronto, ON 5J 2V5",
+    "lat": 43.6434451,
+    "lng": -79.3808684
+  },
+  {
+    "name": "AlertDriving",
+    "address": "12 Concorde Place, Suite 800, Toronto, ON - M3C 3R8, Canada",
+    "lat": 43.730505099999995,
+    "lng": -79.3291782
+  },
+  {
+    "name": "Alexa Translations AI",
+    "address": "2001 Sheppard Avenue East, Suite 801, Toronto, Ontario M2J 4Z8 Canada",
+    "lat": 43.775115899999996,
+    "lng": -79.33840090000001
+  },
+  {
+    "name": "Alias Systems",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Alida, formerly Vision Critical",
+    "address": "365 Bloor St E, Fifth Floor, Toronto, Ontario M4W 3L4, CA",
+    "lat": 43.6719155,
+    "lng": -79.3779708
+  },
+  {
+    "name": "AlphaDesk",
+    "address": "333 Bay St, Suite 400, Toronto, ON M5H 2R2 Canada",
+    "lat": 43.650316499999995,
+    "lng": -79.3806558
+  },
+  {
+    "name": "Alteryx",
+    "address": "14-11, 1 University Avenue, Toronto, M5j 2P1, Canada",
+    "lat": 43.645885299999996,
+    "lng": -79.3830433
+  },
+  {
+    "name": "Amazon",
+    "address": "120 Bremner Blvd, Toronto, ON M5J 0A8, CA",
+    "lat": 43.6431243,
+    "lng": -79.3831033
+  },
+  {
+    "name": "ampEducator",
+    "address": "1 Yonge Street, Suite 1801, Toronto, Ontario M5E1W7, CA",
+    "lat": 43.6424459,
+    "lng": -79.37455380000002
+  },
+  {
+    "name": "Ample Organics",
+    "address": "629 Eastern Ave., Building B, Toronto, ON M4M 1E3",
+    "lat": 43.657891199999995,
+    "lng": -79.3343986
+  },
+  {
+    "name": "Angus Systems",
+    "address": "1125 Leslie Street, Toronto, Ontario M3C 2J6, CA",
+    "lat": 43.7244633,
+    "lng": -79.3468465
+  },
+  {
+    "name": "Animated Media",
+    "address": "196 Spadina Avenue, Toronto, Ontario M5T2C2, CA",
+    "lat": 43.650182,
+    "lng": -79.3973058
+  },
+  {
+    "name": "antuit.ai",
+    "address": "2680 Matheson Blvd E, Suite #102, Mississauga, Ontario L4W 0A5",
+    "lat": 43.661879899999995,
+    "lng": -79.60028659999999
+  },
+  {
+    "name": "Apparmor",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Apple",
+    "address": "1600 120 Bremner Blvd., Toronto, ON M5J OA1 Canada",
+    "lat": 43.642978899999996,
+    "lng": -79.3830966
+  },
+  {
+    "name": "AppSeed, Transmitter Studios",
+    "address": "60 Atlantic Ave. Unit 200, Toronto, ON. Canada",
+    "lat": 43.638363399999996,
+    "lng": -79.4212481
+  },
+  {
+    "name": "AprilAge",
+    "address": "Toronto, ON",
+    "lat": 43.6548046,
+    "lng": -79.3883031
+  },
+  {
+    "name": "Arcestra, Findspace",
+    "address": "197 Spadina Ave. Suite 402, Toronto ON M5T 2C8",
+    "lat": 43.6503662,
+    "lng": -79.3965702
+  },
+  {
+    "name": "Asigra",
+    "address": "79 Brisbane Road, Toronto, ON M3J 2K3",
+    "lat": 43.771327899999996,
+    "lng": -79.4742995
+  },
+  {
+    "name": "AutoServe1",
+    "address": "1655 Dupont St, 101, Toronto, Ontario M6P 3T1, CA",
+    "lat": 43.664218299999995,
+    "lng": -79.4561492
+  },
+  {
+    "name": "Auvenir, a Deloitte venture",
+    "address": "225 Richmond Street West, Suite 402 , Toronto , ON M5V 1W2 , CA",
+    "lat": 43.6492485,
+    "lng": -79.38950009999999
+  },
+  {
+    "name": "Avanti Computer Systems",
+    "address": "251 Consumers Road, Suite 600, Toronto, ON M2J 4R3, CA",
+    "lat": 43.7700499,
+    "lng": -79.330483
+  },
+  {
+    "name": "Avenza Systems",
+    "address": "84 Merton Street, Toronto, ON M4S 1A1, CA",
+    "lat": 43.6970464,
+    "lng": -79.3937577
+  },
+  {
+    "name": "Babylon Health",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Beckard Associates",
+    "address": "206 Gerrard Street East, Toronto, Ontario, Canada M5A 2E6",
+    "lat": 43.6615928,
+    "lng": -79.37143669999999
+  },
+  {
+    "name": "Berqun",
+    "address": "42 Tyre Ave., Etobicoke, ON, M9B 1R5, Canada",
+    "lat": 43.6446439,
+    "lng": -79.5392906
+  },
+  {
+    "name": "Betterez",
+    "address": "2 Bloor St W, Toronto, Ontario CA",
+    "lat": 43.6704775,
+    "lng": -79.3872741
+  },
+  {
+    "name": "BiblioCommons",
+    "address": "119 Spadina Ave., Suite 1000, Toronto ON M5V 2L1",
+    "lat": 43.6470469,
+    "lng": -79.3951462
+  },
+  {
+    "name": "Bifrost Cloud",
+    "address": "250 Consumers Road, 466, Toronto, Ontario M2J 4V6, CA",
+    "lat": 43.770570899999996,
+    "lng": -79.330265
+  },
+  {
+    "name": "Bindy",
+    "address": "#205 - 321 Carlaw Avenue, Toronto, ON M4M 2S1",
+    "lat": 43.6643392,
+    "lng": -79.3411599
+  },
+  {
+    "name": "Bitebank Media",
+    "address": "305-67 Mowat Avenue Toronto, Ontario, Canada M6K 3E3",
+    "lat": 43.638127999999995,
+    "lng": -79.42544219999999
+  },
+  {
+    "name": "Blackbaud",
+    "address": "150 King Street West, IQ Offices, Suite 706, Toronto, ON M5H 1J9",
+    "lat": 43.6481287,
+    "lng": -79.3844846
+  },
+  {
+    "name": "Blackwatch Digital",
+    "address": "Toronto, ON",
+    "lat": 43.6548046,
+    "lng": -79.3883031
+  },
+  {
+    "name": "Blanc Labs",
+    "address": "67 Yonge Street, Suite 1501, Toronto, ON M5E 1J8, Canada",
+    "lat": 43.648784,
+    "lng": -79.3775177
+  },
+  {
+    "name": "Blanclink (Prunto)",
+    "address": "67 Yonge Street, Suite 1501, Toronto, Ontario M5E 1J8, CA",
+    "lat": 43.648784,
+    "lng": -79.3775177
+  },
+  {
+    "name": "Block 64",
+    "address": "3-21 Atlantic Avenue, Toronto ON, Canada, M6K 3E7",
+    "lat": 43.6364465,
+    "lng": -79.4194502
+  },
+  {
+    "name": "Blue Yonder",
+    "address": "9225 Leslie St, Suite 234 Richmond Hill, ON L4B 3H6",
+    "lat": 43.8615383,
+    "lng": -79.3856854
+  },
+  {
+    "name": "Blueprint Software Systems",
+    "address": "90 Eglinton Ave E, Suite 700, Toronto, ON M4P 2Y3, CA",
+    "lat": 43.707595,
+    "lng": -79.39587399999999
+  },
+  {
+    "name": "Board",
+    "address": "88 Queens Quay West, Suite 2500, Toronto, Ontario, M5J 0B8",
+    "lat": 43.641082499999996,
+    "lng": -79.3787196
+  },
+  {
+    "name": "BookJane",
+    "address": "25 Sheppard Ave W, 300, Toronto, Ontario M2N6S6",
+    "lat": 43.7607818,
+    "lng": -79.4122745
+  },
+  {
+    "name": "BoostHQ",
+    "address": "550 Queen Street East, Suite 335, Toronto, Ontario M5A 1V2",
+    "lat": 43.6573322,
+    "lng": -79.3572516
+  },
+  {
+    "name": "BroadView Software",
+    "address": "110 Adelaide Street, East, 3rd Floor, Toronto, ON M5C 1K9, CA",
+    "lat": 43.6517135,
+    "lng": -79.3734532
+  },
+  {
+    "name": "BugClipper",
+    "address": "10 Dundas Street East, Toronto, Ontario M5B 2G9, CA",
+    "lat": 43.656965799999995,
+    "lng": -79.3804789
+  },
+  {
+    "name": "BumpTop",
+    "address": "67 Yonge St, Suite 1600, Toronto, ON M5E 1J8, CA",
+    "lat": 43.648784,
+    "lng": -79.377518
+  },
+  {
+    "name": "Bunz",
+    "address": "183 Bathurst Street, Toronto, ON M5T 2R7",
+    "lat": 43.6477019,
+    "lng": -79.4039607
+  },
+  {
+    "name": "Buy with Impact",
+    "address": "251 Spadina Ave, Toronto, Ontario M5T 2E2, CA",
+    "lat": 43.6518345,
+    "lng": -79.39708069999999
+  },
+  {
+    "name": "Buz Club Software",
+    "address": "85 Brisbane Rd., North York, ON M3J 2K3, Canada",
+    "lat": 43.771144899999996,
+    "lng": -79.4755297
+  },
+  {
+    "name": "C&C Software Solutions",
+    "address": "St. Thomas, ON",
+    "lat": 42.7777214,
+    "lng": -81.18265269999999
+  },
+  {
+    "name": "Cadency",
+    "address": "305 - 2750 14th Avenue, Markham, Ontario L3R 0B6, CA",
+    "lat": 43.8305116,
+    "lng": -79.3591555
+  },
+  {
+    "name": "CalendarHero, formerly Zoom.ai",
+    "address": "325 Front Street West, 4th floor, Toronto, Ontario M5V2L1",
+    "lat": 43.6432809,
+    "lng": -79.39026969999999
+  },
+  {
+    "name": "calliflower (Callbridge)",
+    "address": "845 St Clair Ave W, Toronto, Ontario CA",
+    "lat": 43.6800742,
+    "lng": -79.4321823
+  },
+  {
+    "name": "Cambridge Global Payments",
+    "address": "212 King Street West, Suite 400, Toronto, Ontario M5H 1K5, CA",
+    "lat": 43.647561499999995,
+    "lng": -79.3864138
+  },
+  {
+    "name": "Campayn",
+    "address": "131 BLOOR STREET WEST, SUITE 200, TORONTO, ONTARIO M5S 1R8",
+    "lat": 43.6686677,
+    "lng": -79.3923087
+  },
+  {
+    "name": "CampBrain",
+    "address": "411-366 Adelaide St. E, Toronto, ON M5A 3X9, CA",
+    "lat": 43.652431199999995,
+    "lng": -79.3682049
+  },
+  {
+    "name": "Canvass Analytics",
+    "address": "301-410 Adelaide Street West, Toronto, Ontario  M5V 1S8",
+    "lat": 43.6474269,
+    "lng": -79.3911811
+  },
+  {
+    "name": "Careerleaf",
+    "address": "73 Simcoe St, Suite 307, Toronto, Ontario M5J 1W9, CA",
+    "lat": 43.6467701,
+    "lng": -79.3853718
+  },
+  {
+    "name": "CaseWare",
+    "address": "1 Toronto St, Suite 1400, Toronto, ON M5C 2V6 Canada",
+    "lat": 43.6499686,
+    "lng": -79.3756968
+  },
+  {
+    "name": "CDK Global",
+    "address": "1210 Sheppard Ave E, Toronto, Ontario CA",
+    "lat": 43.7736627,
+    "lng": -79.3675051
+  },
+  {
+    "name": "CellStore Software",
+    "address": "Pickering, ON",
+    "lat": 43.838411699999995,
+    "lng": -79.0867579
+  },
+  {
+    "name": "CellWand Communications",
+    "address": "48 Yonge Street, Suite 1200, Toronto, Ontario M5E1G6, CA",
+    "lat": 43.6479916,
+    "lng": -79.377735
+  },
+  {
+    "name": "Cerebri AI",
+    "address": "330 Bay Street, 9th floor, Toronto, ON  M5H 2S8",
+    "lat": 43.65003360000001,
+    "lng": -79.38120909999999
+  },
+  {
+    "name": "Ceridian",
+    "address": "4110 Yonge Street, Suite 604, Toronto, On M2P 2B7, CA",
+    "lat": 43.7462478,
+    "lng": -79.40913549999999
+  },
+  {
+    "name": "Certent DisclosureNet",
+    "address": "330 Bay Street, Suite 200, Toronto, Ontario M5H 2S8, CA",
+    "lat": 43.6500638,
+    "lng": -79.3811822
+  },
+  {
+    "name": "Chatter Research",
+    "address": "10 Dundas St E. Suite 600, Toronto, ON M5B 2G9",
+    "lat": 43.6568836,
+    "lng": -79.38046299999999
+  },
+  {
+    "name": "CineSend",
+    "address": "208 Adelaide Street WEst, Toronto, ON M5H1W7, CA",
+    "lat": 43.6486084,
+    "lng": -79.3872476
+  },
+  {
+    "name": "Clipwire Games",
+    "address": "90 Richmond St E, 100, Toronto, Ontario M5C 1N9, CA",
+    "lat": 43.6527453,
+    "lng": -79.3747042
+  },
+  {
+    "name": "Closing Folders",
+    "address": "171 East Liberty Street, Suite 300, Toronto, ON   M6K 3P6",
+    "lat": 43.6381862,
+    "lng": -79.4177651
+  },
+  {
+    "name": "CMiC",
+    "address": "4850 Keele Street,, Toronto, ON, M3J 3K1",
+    "lat": 43.7788316,
+    "lng": -79.49538989999999
+  },
+  {
+    "name": "Cognizant",
+    "address": "7100 West Credit Avenue, Mississauga, ON, L5N 5N1",
+    "lat": 43.607916499999995,
+    "lng": -79.7552336
+  },
+  {
+    "name": "Cognota, formerly Synapse",
+    "address": "410 Adelaide St W, Toronto, Ontario M5V 1S8, CA",
+    "lat": 43.6467232,
+    "lng": -79.396766
+  },
+  {
+    "name": "Coinberry",
+    "address": "320 Davenport Rd, Toronto, Ontario CA",
+    "lat": 43.6747637,
+    "lng": -79.4005406
+  },
+  {
+    "name": "CommonOffice",
+    "address": "1881 Yonge Street 6th Floor, Toronto, ON M4S 3C4",
+    "lat": 43.6977676,
+    "lng": -79.39603319999999
+  },
+  {
+    "name": "commonsku",
+    "address": "250 Merton St, Suite 504, Toronto, Ontario M4S1B1, CA",
+    "lat": 43.697998899999995,
+    "lng": -79.38867499999999
+  },
+  {
+    "name": "ComplianceQuest",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Conceptualiz",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Condo Control Central",
+    "address": "2 Carlton St #1000, Toronto, ON M5B 1J3",
+    "lat": 43.661641499999995,
+    "lng": -79.38279519999999
+  },
+  {
+    "name": "CondoEssentials",
+    "address": "1 Yonge Street, Suite 1801, Toronto, Ontario M5E 1W7 Canada",
+    "lat": 43.6424459,
+    "lng": -79.37455380000002
+  },
+  {
+    "name": "Consumer Smart Media",
+    "address": "300 Supertest Rd, North York, ON M3J 2M2",
+    "lat": 43.7778139,
+    "lng": -79.4727674
+  },
+  {
+    "name": "Contractor Compliance",
+    "address": "8 Case Goods Lane #208, Toronto, ON M5A 3C4, Canada",
+    "lat": 43.649947999999995,
+    "lng": -79.359031
+  },
+  {
+    "name": "Copper",
+    "address": "1050 King St W, Toronto, ON M6K 0C7, CA",
+    "lat": 43.640257399999996,
+    "lng": -79.4215425
+  },
+  {
+    "name": "Cority",
+    "address": "250 Bloor Street East, 9th Floor, Box 15, Toronto, Ontario M3W 1E6, CA",
+    "lat": 43.6719377,
+    "lng": -79.38078449999999
+  },
+  {
+    "name": "Crawford Technologies",
+    "address": "20 Bay Street, Suite 1105, Toronto, Ontario, Canada, M5J 2N8",
+    "lat": 43.64168,
+    "lng": -79.377878
+  },
+  {
+    "name": "Crowdbabble",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "CrowdRiff",
+    "address": "116 Spadina Ave., Suite 400, Toronto, ON, M5V 2K6",
+    "lat": 43.6471496,
+    "lng": -79.3959923
+  },
+  {
+    "name": "Cryptoworth",
+    "address": "1 Yonge St, Toronto, Ontario M5E, CA",
+    "lat": 43.6429251,
+    "lng": -79.3741862
+  },
+  {
+    "name": "Cumulonimbus",
+    "address": "230-101 College St, Toronto, ON M5G 1L7, CA",
+    "lat": 43.6599298,
+    "lng": -79.3886594
+  },
+  {
+    "name": "Cyxtera",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Dango",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Dassault Systemes",
+    "address": "110 Younge Street, Suite 1400, M5C 1T4 Toronto, Ontario, CA",
+    "lat": 43.650142900000006,
+    "lng": -79.3787241
+  },
+  {
+    "name": "databricks",
+    "address": "120 Adelaide St. W Toronto, Ontario M5H, 1P9 CANADA",
+    "lat": 43.649906,
+    "lng": -79.3832441
+  },
+  {
+    "name": "DataGlider",
+    "address": "25 Leek Cr., Toronto, Ontario, Canada L4B 4B3",
+    "lat": 43.8623519,
+    "lng": -79.3794559
+  },
+  {
+    "name": "Dealertrack (Cox Automotive)",
+    "address": "2700 Matheson Blvd E., East Tower, Suite 702, Mississauga, ON L4W 4V9",
+    "lat": 43.6627899,
+    "lng": -79.5996112
+  },
+  {
+    "name": "DealMaker",
+    "address": "40 King St W, 1700, Toronto, Ontario M5H3Y2, CA",
+    "lat": 43.6491616,
+    "lng": -79.3795568
+  },
+  {
+    "name": "Deep Genomics",
+    "address": "MaRS Centre, 661 University Ave, Suite 480, Toronto, Ontario, Canada, M5G 1M1",
+    "lat": 43.6599298,
+    "lng": -79.3886594
+  },
+  {
+    "name": "deepPiXEL",
+    "address": "1200 Lawrence Ave E, Toronto, Ontario CA",
+    "lat": 43.741518899999996,
+    "lng": -79.3200176
+  },
+  {
+    "name": "Deliverr",
+    "address": "1 York St, Toronto, Ontario M5J 0B6, CA",
+    "lat": 43.641531699999994,
+    "lng": -79.38070540000001
+  },
+  {
+    "name": "Dell Technologies",
+    "address": "155 Gordon Baker Road, Suite 501 North York, Ontario Toronto Ontario M2H 3N5",
+    "lat": 43.8044368,
+    "lng": -79.344053
+  },
+  {
+    "name": "Dentem",
+    "address": "67 Yonge Street, Suite 1600, Toronto, Ontario M5E 1J8, Canada",
+    "lat": 43.648784,
+    "lng": -79.377518
+  },
+  {
+    "name": "Derivative",
+    "address": "401 Richmond St West, Studio 386, Toronto, Canada M5V 3A8",
+    "lat": 43.647814,
+    "lng": -79.3945565
+  },
+  {
+    "name": "Deveron UAS",
+    "address": "141 Adelaide St W, Toronto, Ontario M5H, CA",
+    "lat": 43.648913,
+    "lng": -79.3842087
+  },
+  {
+    "name": "Docebo",
+    "address": "366 Adelaide St W, Toronto, Ontario M5V 1R7 CA",
+    "lat": 43.6472864,
+    "lng": -79.3943912
+  },
+  {
+    "name": "DocuSign",
+    "address": "40 King St, West 41st Floor, Toronto, Ontario M5H 4A9, CA",
+    "lat": 43.649283499999996,
+    "lng": -79.3794533
+  },
+  {
+    "name": "Dynalist",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "eBRP",
+    "address": "230-7895 Tranmere Drive, Toronto, Ontario L5S 1V9, CA",
+    "lat": 43.679343300000006,
+    "lng": -79.670823
+  },
+  {
+    "name": "eBSEG",
+    "address": "1200 Bay Street, Suite 202, Toronto, Ontario M5R 2A5, CA",
+    "lat": 43.6699987,
+    "lng": -79.3898475
+  },
+  {
+    "name": "eCompliance",
+    "address": "111 Queen Street E, Suite #500, Toronto, Ontario M6K 1G2 , CA",
+    "lat": 43.6513456,
+    "lng": -79.3839454
+  },
+  {
+    "name": "Ecopia.AI",
+    "address": "101 College Street, Toronto, ON M5G 1L7, CA",
+    "lat": 43.6599298,
+    "lng": -79.3886594
+  },
+  {
+    "name": "Eddy Travels",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Edisoft",
+    "address": "1210 Sheppard Ave East, Suite 710, Toronto, ON M2K 1E3",
+    "lat": 43.773657199999995,
+    "lng": -79.3675062
+  },
+  {
+    "name": "EidoSearch",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Elastic",
+    "address": "56 Temperance Street, Toronto, ON M5H 3V5",
+    "lat": 43.6506062,
+    "lng": -79.3817767
+  },
+  {
+    "name": "Empty Cubicle",
+    "address": "46 Spadina Avenue, Toronto, Ontario M5V 2H8, CA",
+    "lat": 43.6446002,
+    "lng": -79.3951586
+  },
+  {
+    "name": "EnergyX",
+    "address": "212 King St W, Toronto, Ontario CA",
+    "lat": 43.6475562,
+    "lng": -79.3864152
+  },
+  {
+    "name": "Engager",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Epsilon",
+    "address": "175 Bloor Street E.m North Tower, Floor 12, Toronto, ON M4W 3R9",
+    "lat": 43.6707052,
+    "lng": -79.3825177
+  },
+  {
+    "name": "EQ works",
+    "address": "1235 Bay Street, Suite 401, Toronto, ON M5R 3K4",
+    "lat": 43.670887,
+    "lng": -79.389679
+  },
+  {
+    "name": "eSCRIBE Software",
+    "address": "60 Centurian Drive #204, Markham, Ontario L3R 9R2, CA",
+    "lat": 43.853027,
+    "lng": -79.361994
+  },
+  {
+    "name": "Essential Accessibility",
+    "address": "300 – 83 Yonge Street Toronto, ON M5C 1S8",
+    "lat": 43.6564525,
+    "lng": -79.3811393
+  },
+  {
+    "name": "Ethoca",
+    "address": "100 Sheppard Ave. East, Suite 605, Toronto, ON M2N 6N5 Canada",
+    "lat": 43.7632418,
+    "lng": -79.4054376
+  },
+  {
+    "name": "Evercondo",
+    "address": "425 Adelaide St W, Toronto, ON M5V 3C1, Canada",
+    "lat": 43.6460984,
+    "lng": -79.39774059999999
+  },
+  {
+    "name": "ExactFlat",
+    "address": "3250 Bloor Str W, Toronto, ONTARIO M8X 2X9, CA",
+    "lat": 43.645586699999996,
+    "lng": -79.5204842
+  },
+  {
+    "name": "Expancio",
+    "address": "2100 Matheson Blvd E, 202, Mississauga, Ontario L4W 5P8, CA",
+    "lat": 43.6530852,
+    "lng": -79.61465559999999
+  },
+  {
+    "name": "ExpertFile",
+    "address": "Toronto, Ontario",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "FakeJSON",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Fast Office",
+    "address": "94 Laurentide Dr, Toronto, Ontario M3A, CA",
+    "lat": 43.7560582,
+    "lng": -79.3389659
+  },
+  {
+    "name": "Fiix Software",
+    "address": "35 Golden Ave Suite A-201, Toronto, Ontario M6R 2J5, CA",
+    "lat": 43.6539022,
+    "lng": -79.4479207
+  },
+  {
+    "name": "Finastra",
+    "address": "120 Bremner Boulevard, 30th Floor, Toronto, Ontario M5J 0A8, CA",
+    "lat": 43.6430383,
+    "lng": -79.3831156
+  },
+  {
+    "name": "Finneo",
+    "address": "55 York Street, Suite 201, Toronto, ON, M5J 1R7",
+    "lat": 43.6462161,
+    "lng": -79.38256319999999
+  },
+  {
+    "name": "Firmex",
+    "address": "110 Spadina Ave. #700, Toronto, ON M5V 2K4, Canada",
+    "lat": 43.6468637,
+    "lng": -79.3960022
+  },
+  {
+    "name": "Firmwater",
+    "address": "20 Maud Street, Suite 405, Toronto, Ontario M5V 2M5, CA",
+    "lat": 43.646429999999995,
+    "lng": -79.4001119
+  },
+  {
+    "name": "FIS Global",
+    "address": "100 King St W Suite 5350, 53rd Floor",
+    "lat": 43.648775199999996,
+    "lng": -79.3784532
+  },
+  {
+    "name": "Fixtimate",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Flexport",
+    "address": "1 University Ave, Toronto, Ontario, ON M5J 2P1, Canada",
+    "lat": 43.645800799999996,
+    "lng": -79.38311589999999
+  },
+  {
+    "name": "Flextrela (FlightHero)",
+    "address": "12 Eleanor Circle, Richmond Hill, ON, L4C 6K7, Canada",
+    "lat": 43.839727599999996,
+    "lng": -79.4313629
+  },
+  {
+    "name": "Flipp",
+    "address": "3250 Bloor Street West, East Tower, Bloor Islington Place, Toronto, Ontario M8X 2X9, CA",
+    "lat": 43.645586699999996,
+    "lng": -79.5204842
+  },
+  {
+    "name": "Flybits",
+    "address": "200 Wellington St W, Toronto, Ontario M5V, CA",
+    "lat": 43.6459076,
+    "lng": -79.38782239999999
+  },
+  {
+    "name": "Flywire",
+    "address": "181 Bay Street,Toronto, Suite 1800 , Toronto, ON M5J 2T9, CA",
+    "lat": 43.647134699999995,
+    "lng": -79.3789905
+  },
+  {
+    "name": "FocusedQ",
+    "address": "20 Dundas St W STE 921, Toronto, ON M5G 2H1",
+    "lat": 43.656344999999995,
+    "lng": -79.38236409999999
+  },
+  {
+    "name": "Fortay.ai",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Fortuna.ai",
+    "address": "180 John Street, Floor 4, Toronto, ON M5T 1X5",
+    "lat": 43.65068180000001,
+    "lng": -79.3917471
+  },
+  {
+    "name": "FreeSight Software",
+    "address": "5700 Yonge St, Toronto, Ontario M2M 4K2, CA",
+    "lat": 43.78124030000001,
+    "lng": -79.4161987
+  },
+  {
+    "name": "FreshBooks",
+    "address": "1655 Dupont Street, Suite 250, Toronto, Ontario M6P 3T1, CA",
+    "lat": 43.6642267,
+    "lng": -79.4561635
+  },
+  {
+    "name": "Freshworks",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Freyr iReady",
+    "address": "100 Consilium Place, Suite 200, Scarborough, M1H 3E3, Canada",
+    "lat": 43.777031699999995,
+    "lng": -79.2522848
+  },
+  {
+    "name": "Freyr Label 360",
+    "address": "100 Consilium Place, Suite 200, Scarborough, M1H 3E3, Canada",
+    "lat": 43.777031699999995,
+    "lng": -79.2522848
+  },
+  {
+    "name": "Freyr SPL-SPM",
+    "address": "100 Consilium Place, Suite 200, Scarborough, M1H 3E3, Canada",
+    "lat": 43.777031699999995,
+    "lng": -79.2522848
+  },
+  {
+    "name": "Fundingportal",
+    "address": "Toronto, Ontario",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "FutureVault",
+    "address": "Suite 300 - 110 Spadina, Toronto, ON, M5V 2K4 Canada",
+    "lat": 43.6468637,
+    "lng": -79.3960022
+  },
+  {
+    "name": "Gazoo Mobile",
+    "address": "421 Eglinton Avenue East, Toronto, M4P 1M6 CA",
+    "lat": 43.7095376,
+    "lng": -79.3836431
+  },
+  {
+    "name": "Geomechanica",
+    "address": "390 Bay Street, Suite 900, Toronto, ON M5H 2Y2, CA",
+    "lat": 43.6513603,
+    "lng": -79.3816253
+  },
+  {
+    "name": "Gizmo Grind",
+    "address": "260 Adelaide Street East, Toronto, Ontario M5A 1N1",
+    "lat": 43.6519705,
+    "lng": -79.370425
+  },
+  {
+    "name": "Google",
+    "address": "111 Richmond St W, Toronto, ON M5H 2G4, CA",
+    "lat": 43.6502911,
+    "lng": -79.3839517
+  },
+  {
+    "name": "GoPeer",
+    "address": "111 Peter St, Suite 700, Toronto, ON M5V 2H1",
+    "lat": 43.647861999999996,
+    "lng": -79.39290290000001
+  },
+  {
+    "name": "GroupBy",
+    "address": "2 Berkeley St. Suite 210, Toronto, ON M5A 4J5 Canada",
+    "lat": 43.650137099999995,
+    "lng": -79.3645593
+  },
+  {
+    "name": "Groupdesk",
+    "address": "51 Bulwer St, 1, Toronto, Ontario M5T 1A1, CA",
+    "lat": 43.6490886,
+    "lng": -79.3957204
+  },
+  {
+    "name": "Hangry",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Happy Go Mobile",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "HELM Life",
+    "address": "229 Niagara St. Toronto, CA",
+    "lat": 43.643717099999996,
+    "lng": -79.4087646
+  },
+  {
+    "name": "Hilo",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Hockeystick",
+    "address": "325 Front Street West, 4th Floor, Toronto, On M5V 2Y1, CA",
+    "lat": 43.6432809,
+    "lng": -79.39026969999999
+  },
+  {
+    "name": "Homeboy Software",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "HR Systems Strategies",
+    "address": "35 Wascana Ave., Toronto ON M5A 1V6",
+    "lat": 43.6579901,
+    "lng": -79.3577853
+  },
+  {
+    "name": "Hubdoc",
+    "address": "250 University Ave, Suite 400, Toronto, Ontario M5H 3E5, CA",
+    "lat": 43.65027130000001,
+    "lng": -79.3869314
+  },
+  {
+    "name": "Hubio",
+    "address": "20 Victoria Street, 6th Floor, Toronto, Ontario M5C 2N8, CA",
+    "lat": 43.6499935,
+    "lng": -79.37721959999999
+  },
+  {
+    "name": "Hypercare",
+    "address": "313 Queen Street West, Suite 204, Toronto, Ontario M5V2A4, CA",
+    "lat": 43.6496517,
+    "lng": -79.3912321
+  },
+  {
+    "name": "i3 International",
+    "address": "780 Birchmount Rd, Unit 16, Toronto, ON M1K 5H4",
+    "lat": 43.726389399999995,
+    "lng": -79.2778007
+  },
+  {
+    "name": "Icontek",
+    "address": "2300 Yonge Street, Toronto, ON, Canada",
+    "lat": 43.7071228,
+    "lng": -79.3994721
+  },
+  {
+    "name": "Ideal",
+    "address": "111 Peter St, 800, Toronto, Ontario M5V 2G9, CA",
+    "lat": 43.647861999999996,
+    "lng": -79.39290290000001
+  },
+  {
+    "name": "ILance",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "iMerciv",
+    "address": "100 College Street, unit 302, Toronto, ON, M5G 1L5",
+    "lat": 43.6604812,
+    "lng": -79.3886581
+  },
+  {
+    "name": "Impossible Things",
+    "address": "230 Richmond St W, Toronto, Ontario CA",
+    "lat": 43.649698699999995,
+    "lng": -79.3886297
+  },
+  {
+    "name": "Indition",
+    "address": "1370 Don Mills Road - Suite #100, Toronto, ON M3B 3N7",
+    "lat": 43.7467744,
+    "lng": -79.34646769999999
+  },
+  {
+    "name": "InfoFlo (Carmel Vision)",
+    "address": "148 Sheppard Ave West, Toronto, Ontario M2N 1M8",
+    "lat": 43.7600437,
+    "lng": -79.4185134
+  },
+  {
+    "name": "Informatica",
+    "address": "120 Bremner Blvd., Suite 1550, 15th Floor, Toronto, ON M5J 0A8",
+    "lat": 43.6430569,
+    "lng": -79.38309579999999
+  },
+  {
+    "name": "Instacart",
+    "address": "190 Liberty St, Suite 200, Toronto, Ontario M6K 3L5, CA",
+    "lat": 43.6377385,
+    "lng": -79.42581729999999
+  },
+  {
+    "name": "Insurance Systems",
+    "address": "5230 Dundas St W, Etobicoke, ON M9B 1A8, Canada",
+    "lat": 43.6400589,
+    "lng": -79.53803909999999
+  },
+  {
+    "name": "IntakeQ",
+    "address": "Hamilton, ON",
+    "lat": 43.2557206,
+    "lng": -79.8711024
+  },
+  {
+    "name": "Integrate.ai",
+    "address": "480 University Avenue, Toronto, Ontario M5G 1V2 Canada",
+    "lat": 43.6550684,
+    "lng": -79.38888539999999
+  },
+  {
+    "name": "Intel",
+    "address": "150 Bloor Street West, Suite 400, Toronto, Ontario, Canada M5S 2X9",
+    "lat": 43.6694429,
+    "lng": -79.3937969
+  },
+  {
+    "name": "Intelex",
+    "address": "70 University Avenue, 8th Floor, Toronto, ON M5J 2M4, CA",
+    "lat": 43.646629399999995,
+    "lng": -79.38473189999999
+  },
+  {
+    "name": "Intellizence",
+    "address": "55 York Street, Suite 401, Toronto ON M5J 1R7",
+    "lat": 43.6462013,
+    "lng": -79.38248949999999
+  },
+  {
+    "name": "Intuit",
+    "address": "5100 Spectrum Way, Mississauga, ontario L4W 5S2 Canada",
+    "lat": 43.6485693,
+    "lng": -79.6104661
+  },
+  {
+    "name": "InVintory",
+    "address": "240 Richmond St W, Toronto, Ontario M5V 1V6, CA",
+    "lat": 43.6497141,
+    "lng": -79.38887799999999
+  },
+  {
+    "name": "iotum",
+    "address": "845 St Clair Ave W, Toronto, Ontario CA",
+    "lat": 43.6800742,
+    "lng": -79.4321823
+  },
+  {
+    "name": "IXACT Contact",
+    "address": "137 Bentworth Ave, Toronto, Ontario M6A 1P6, CA",
+    "lat": 43.7202507,
+    "lng": -79.4648291
+  },
+  {
+    "name": "Joist",
+    "address": "490 Adelaide St W, 3rd Floor, Toronto, Ontario M5V 1T2, CA",
+    "lat": 43.6460802,
+    "lng": -79.40008759999999
+  },
+  {
+    "name": "Kamazooie Development Corporation",
+    "address": "254 Barrhill Road, Toronto, Ontario CA",
+    "lat": 43.848394899999995,
+    "lng": -79.5040224
+  },
+  {
+    "name": "KEV School Solutions",
+    "address": "1167 Caledonia Road, Suite 200, Toronto, ON M6A 2X1 Canada",
+    "lat": 43.7160586,
+    "lng": -79.4671053
+  },
+  {
+    "name": "Klyck.io",
+    "address": "60 Atlantic Avenue, Suite 200, Toronto, ON M6K 1X9",
+    "lat": 43.638363399999996,
+    "lng": -79.4212481
+  },
+  {
+    "name": "Knit People",
+    "address": "20 Richmond St E, Toronto, Ontario M5C, CA",
+    "lat": 43.652083999999995,
+    "lng": -79.3782736
+  },
+  {
+    "name": "KnowledgeHook",
+    "address": "151 Charles St. W, Suite 100, Kitchener, ON N2G 1H6, CA",
+    "lat": 43.451111700000006,
+    "lng": -80.4984798
+  },
+  {
+    "name": "Kooltra",
+    "address": "26 Soho St, Suite #300, Toronto, ON, Canada, M5T 1Z7",
+    "lat": 43.650366999999996,
+    "lng": -79.39431060000001
+  },
+  {
+    "name": "Korbitec",
+    "address": "8 King Street East, Suite 1200, Toronto, Ontario M5C 1B5, CA",
+    "lat": 43.6493933,
+    "lng": -79.3777186
+  },
+  {
+    "name": "KUBRA",
+    "address": "5050 Tomken Road, Mississauga, Ontario L4W 5B1, CA",
+    "lat": 43.6273872,
+    "lng": -79.6323154
+  },
+  {
+    "name": "Lane",
+    "address": "225 King St W, Suite 1200, Toronto, ON M5V 3M2",
+    "lat": 43.6466821,
+    "lng": -79.38817430000002
+  },
+  {
+    "name": "League",
+    "address": "225 King Street West, Toronto, Ontario",
+    "lat": 43.6466821,
+    "lng": -79.38817430000002
+  },
+  {
+    "name": "LegUp Computing. part of Microchip Technology",
+    "address": "88 College St., Toronto, Ontario M5G 1L4, CA",
+    "lat": 43.660769599999995,
+    "lng": -79.3877784
+  },
+  {
+    "name": "Lending Loop",
+    "address": "410 Adelaide St W, Toronto, Ontario CA",
+    "lat": 43.6467232,
+    "lng": -79.396766
+  },
+  {
+    "name": "Lendogram",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Leonardo Worldwide",
+    "address": "111 Peter St, Suite 530, Toronto, Ontario M5V, CA",
+    "lat": 43.6479751,
+    "lng": -79.39255059999999
+  },
+  {
+    "name": "LightMesh",
+    "address": "20 Camden St, Suite 200, Toronto, Ontario M5V 1V1, CA",
+    "lat": 43.6473525,
+    "lng": -79.3969875
+  },
+  {
+    "name": "Limelight Software",
+    "address": "4950 Yonge St #2308, North York, ON M2N 6K1, Canada",
+    "lat": 43.7648866,
+    "lng": -79.41259989999999
+  },
+  {
+    "name": "Lisnen",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "LogicLearning",
+    "address": "Toronto, Ontario, Canada",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Lookout",
+    "address": "55 University Ave, Suite 302, Toronto, ON, ON M5J 2H7",
+    "lat": 43.6468202,
+    "lng": -79.38390389999999
+  },
+  {
+    "name": "Loopio",
+    "address": "310 Spadina Ave, Toronto, Ontario M5T, CA",
+    "lat": 43.6534943,
+    "lng": -79.3987739
+  },
+  {
+    "name": "Madgex",
+    "address": "700 Dorval Drive, Oakville, ON, L6K 3V3",
+    "lat": 43.4435112,
+    "lng": -79.696776
+  },
+  {
+    "name": "Magic Leap",
+    "address": "Toronto, ON",
+    "lat": 43.6548046,
+    "lng": -79.3883031
+  },
+  {
+    "name": "Mar-Kov Computer Systems",
+    "address": "130 Bridgeland Avenue, Suite 111, Toronto, ON M6A 1Z4 Canada",
+    "lat": 43.725918199999995,
+    "lng": -79.4630845
+  },
+  {
+    "name": "Massago",
+    "address": "2 Orchard Heights Blvd unit 26, Aurora, ON L4G 3W3",
+    "lat": 44.0090675,
+    "lng": -79.4715992
+  },
+  {
+    "name": "Massively.ai",
+    "address": "130 Queens Quay East, Toronto, ON, M5A 0P6",
+    "lat": 43.6443607,
+    "lng": -79.3683169
+  },
+  {
+    "name": "Mastermind Backup Solutions",
+    "address": "Dundas, Ontario",
+    "lat": 43.266508900000005,
+    "lng": -79.9568685
+  },
+  {
+    "name": "ME to WE Social Enterprises",
+    "address": "339 Queen Street East, Toronto, ON M5A 1S9, CA",
+    "lat": 43.6553179,
+    "lng": -79.36465129999999
+  },
+  {
+    "name": "Media Coin",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Mellowood Medical",
+    "address": "263 Adelaide St W #340, Toronto, ON M5H 3G2, Canada",
+    "lat": 43.6477037,
+    "lng": -79.3895818
+  },
+  {
+    "name": "Meltwater",
+    "address": "150 King St W Suite 7, Toronto, Ontario, M5H 3T9",
+    "lat": 43.6481738,
+    "lng": -79.3843162
+  },
+  {
+    "name": "Meta, formerly Facebook",
+    "address": "661 University Ave, Toronto, ON M5G 1M1, CA",
+    "lat": 43.659500900000005,
+    "lng": -79.3896697
+  },
+  {
+    "name": "Method:CRM",
+    "address": "410 Adelaide St. West, 3rd Floor, Toronto, Ontario M5V 1S8, CA",
+    "lat": 43.6467232,
+    "lng": -79.396766
+  },
+  {
+    "name": "Miromind",
+    "address": "437 Jarvis Street, Toronto, ON M4Y 2H1 Canada",
+    "lat": 43.6641074,
+    "lng": -79.3765411
+  },
+  {
+    "name": "Mnikolic Investment Technologies",
+    "address": "1 Yonge Street, Toronto, ON M5E 1W7, CA",
+    "lat": 43.6429251,
+    "lng": -79.3741862
+  },
+  {
+    "name": "MobilityView",
+    "address": "45 De Vere Gardens, Toronto, Ontario M5M, CA",
+    "lat": 43.738411,
+    "lng": -79.41001969999999
+  },
+  {
+    "name": "MongoDB",
+    "address": "1 University Ave., 3rd Floor, Toronto, ON M5J 2P1 Canada",
+    "lat": 43.6458489,
+    "lng": -79.3830502
+  },
+  {
+    "name": "muse",
+    "address": "555 Richmond St West - Suite 900, Toronto ON, Canada M5V 3B1",
+    "lat": 43.646591,
+    "lng": -79.4024323
+  },
+  {
+    "name": "Myant",
+    "address": "100 Ronson Drive, Etobicoke, Ontario M9W 1B6, CA",
+    "lat": 43.695552199999995,
+    "lng": -79.5681575
+  },
+  {
+    "name": "nCino",
+    "address": "130 King Street West, Suite 1800, Toronto, ON, M5X 1E3 Canada",
+    "lat": 43.6483487,
+    "lng": -79.3831366
+  },
+  {
+    "name": "NCR",
+    "address": "6865 Century Avenue, Mississauga, ON L5N 2E2",
+    "lat": 43.603073699999996,
+    "lng": -79.7492814
+  },
+  {
+    "name": "Neatware",
+    "address": "2900 Warden Ave, Scarborough, ON M1W 3Y8, Canada",
+    "lat": 43.7984738,
+    "lng": -79.31821269999999
+  },
+  {
+    "name": "NetSupport",
+    "address": "445 Apple Creek Blvd,, Suite 119,, Markham, Ontario L3R 9X7, CA",
+    "lat": 43.8594335,
+    "lng": -79.3462476
+  },
+  {
+    "name": "New Spark Media",
+    "address": "Toronto, Ontario",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Nexant",
+    "address": "5TD Canada Trust Tower,  61 Bay Street, 27th Floor, Toronto , M5J 2S1 Canada",
+    "lat": 43.6466166,
+    "lng": -79.37876109999999
+  },
+  {
+    "name": "NexJ Health",
+    "address": "3080 Yonge Street, Suite 5016, Toronto, Ontario M4N 3N1, CA",
+    "lat": 43.7255749,
+    "lng": -79.4027551
+  },
+  {
+    "name": "NexJ Systems",
+    "address": "10 York Mills Road, 7th Floor, Toronto, ON M2P 2G4, CA",
+    "lat": 43.7445884,
+    "lng": -79.4060059
+  },
+  {
+    "name": "Nexonia",
+    "address": "2 St. Clair Avenue East, Suite 750, Toronto, Ontario, Canada M4T 2T5",
+    "lat": 43.688466999999996,
+    "lng": -79.393801
+  },
+  {
+    "name": "Nirvah, formerly Feedback",
+    "address": "33 Bloor St E, Toronto, Ontario M4W, CA",
+    "lat": 43.669837799999996,
+    "lng": -79.38566709999999
+  },
+  {
+    "name": "Noteloop",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Nudge",
+    "address": "300-425 Adelaide St. West, Toronto, ON, Canada M5V 3C1",
+    "lat": 43.6460984,
+    "lng": -79.39774059999999
+  },
+  {
+    "name": "Nymi",
+    "address": "82 Peter St, Toronto, Ontario M5V, CA",
+    "lat": 43.6467228,
+    "lng": -79.3929685
+  },
+  {
+    "name": "OMX",
+    "address": "460 Richmond St W #701, Toronto, ON M5V 1Y1, Canada",
+    "lat": 43.647890499999995,
+    "lng": -79.3977355
+  },
+  {
+    "name": "OnCall Health",
+    "address": "34 Minowan Miikan Lane, Toronto, Ontario M6J 0G3, CA",
+    "lat": 43.643384999999995,
+    "lng": -79.428336
+  },
+  {
+    "name": "OneIQ",
+    "address": "51 Breithaupt Street, Suite 100, Kitchener, Ontario N2H 5G5, CA",
+    "lat": 43.4541778,
+    "lng": -80.49903119999999
+  },
+  {
+    "name": "OneLocal",
+    "address": "473 Adelaide St W Suite 400, \nToronto, Ontario M5V 1T1 Canada",
+    "lat": 43.645704,
+    "lng": -79.4000046
+  },
+  {
+    "name": "Onsched",
+    "address": "2275 Lake Shore Blvd W, Toronto, Ontario CA",
+    "lat": 43.619572399999996,
+    "lng": -79.48520309999999
+  },
+  {
+    "name": "OpenText",
+    "address": "2655 N. Sheridan Way, Suites 301 & 300, Mississauga ON L5K 2N6 Canada",
+    "lat": 43.512901799999995,
+    "lng": -79.6624023
+  },
+  {
+    "name": "OPIO App",
+    "address": "505 Eglinton Ave W, 402, Toronto, Ontario M5N1B1, CA",
+    "lat": 43.7034405,
+    "lng": -79.4133538
+  },
+  {
+    "name": "Opterus",
+    "address": "525 Adelaide Street, Toronto, Ontario M5V 0N7, CA",
+    "lat": 43.6452576,
+    "lng": -79.4021734
+  },
+  {
+    "name": "P & P Data Systems",
+    "address": "99 Saint Regis Crescent North, Toronto, Ontario M3J 2Y9, CA",
+    "lat": 43.7567714,
+    "lng": -79.4814187
+  },
+  {
+    "name": "Paddle HR",
+    "address": "401 Richmond Street West, Toronto, Ontario CA",
+    "lat": 43.6476322,
+    "lng": -79.3950698
+  },
+  {
+    "name": "Panl",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Panorama",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Parity",
+    "address": "462 Wellington St W. Suite 201, Toronto, ON M5V 1E3 Canada",
+    "lat": 43.6438428,
+    "lng": -79.39782129999999
+  },
+  {
+    "name": "Parkbench.com",
+    "address": "100 University Avenue Fifth Floor Toronto, ON M5J 1V6",
+    "lat": 43.6472893,
+    "lng": -79.3849726
+  },
+  {
+    "name": "Parlay Ideas",
+    "address": "10 Dundas St. East, 6th Floor, Toronto, ON M5B 2G9, CA",
+    "lat": 43.6568919,
+    "lng": -79.3802024
+  },
+  {
+    "name": "ParseHub",
+    "address": "619-2 Carlton Street, Toronto, ON M5B 1J3 Canada",
+    "lat": 43.6616746,
+    "lng": -79.3827503
+  },
+  {
+    "name": "PartnerStack",
+    "address": "129 Spadina Ave, Toronto, Ontario M5V, CA",
+    "lat": 43.647412900000006,
+    "lng": -79.3954428
+  },
+  {
+    "name": "PathFactory",
+    "address": "174 Spadina Avenue, Suite 600, Toronto, Canada M5T 2C2",
+    "lat": 43.6492796,
+    "lng": -79.3972158
+  },
+  {
+    "name": "Payment Rails",
+    "address": "130 King Street West, Suite 1800, Toronto, ON M5X 1E3 Canada",
+    "lat": 43.6483487,
+    "lng": -79.3831366
+  },
+  {
+    "name": "PaymentEvolution",
+    "address": "2600 Skymark Ave, Building 1, Suite 200, Mississauga, Ontario L4W 5B2",
+    "lat": 43.6579486,
+    "lng": -79.59822079999999
+  },
+  {
+    "name": "Paypal",
+    "address": "661 University Ave, Toronto, ON M5G 1M1, Canada",
+    "lat": 43.659500900000005,
+    "lng": -79.3896697
+  },
+  {
+    "name": "Pegasystems",
+    "address": "130 King Street West, Suite 1800, Toronto, ON M5X 1E3 Canada",
+    "lat": 43.6483487,
+    "lng": -79.3831366
+  },
+  {
+    "name": "Personify",
+    "address": "144 Front Street West, STE 725, Toronto, Ontario M5J 2L7 Canada",
+    "lat": 43.645399000000005,
+    "lng": -79.3839569
+  },
+  {
+    "name": "PhenoTips",
+    "address": "100 College St, Suite 310, Toronto, M5G 1L5 M5G 1L5, CA",
+    "lat": 43.6605744,
+    "lng": -79.3886112
+  },
+  {
+    "name": "PianoShelf",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Planimetron",
+    "address": "3 Church St., Suite 200, Toronto, ON M5E 1M2, CA",
+    "lat": 43.6476526,
+    "lng": -79.37329439999999
+  },
+  {
+    "name": "Plum",
+    "address": "60 Bathurst Dr, 9, Waterloo, Ontario N2V 2A9, CA",
+    "lat": 43.508429500000005,
+    "lng": -80.538873
+  },
+  {
+    "name": "Portfolio Aid",
+    "address": "166 Pearl Street, Suite 200, Toronto, ON Canada\nM5H 1L3",
+    "lat": 43.647675799999995,
+    "lng": -79.3881204
+  },
+  {
+    "name": "Private AI",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Pro Angler",
+    "address": "Toronto, ON",
+    "lat": 43.6548046,
+    "lng": -79.3883031
+  },
+  {
+    "name": "ProEst Estimating Software",
+    "address": "1 University Ave, Suite 04-115, Toronto, ON M5J 2P1, Canada",
+    "lat": 43.6458297,
+    "lng": -79.38319039999999
+  },
+  {
+    "name": "Property Vista Software",
+    "address": "808-3280 Bloor Street W., Toronto, ON M8X 2X3",
+    "lat": 43.6454726,
+    "lng": -79.5221911
+  },
+  {
+    "name": "Protractor Software",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Psi-fleet",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Q4",
+    "address": "469-A King St. W., Toronto, ON M5V 1K4, CA",
+    "lat": 43.6448348,
+    "lng": -79.39678339999999
+  },
+  {
+    "name": "Quantum Growth Advisors / Tech Track",
+    "address": "1 Yonge St, Suite 1801, Toronto, Ontario M5E, CA",
+    "lat": 43.6424459,
+    "lng": -79.37455380000002
+  },
+  {
+    "name": "ranjeR",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Rapid7",
+    "address": "1 Toronto St, Suite 700 , Toronto, ON M5C 2V6, CA",
+    "lat": 43.6499686,
+    "lng": -79.3756968
+  },
+  {
+    "name": "Razor Logic Systems",
+    "address": "214 King St W, Suite 510, Toronto, Ontario M5H 3S6, CA",
+    "lat": 43.647580999999995,
+    "lng": -79.38688110000001
+  },
+  {
+    "name": "Real Estate Dot Love (DOT LOVE)",
+    "address": "77 Adelaide Street West, Toronto, Ontario M5X 1C1, CA",
+    "lat": 43.649384,
+    "lng": -79.3825089
+  },
+  {
+    "name": "Relasoft Solutions",
+    "address": "81 Glen Park Ave, North York, ON M6B 2C3",
+    "lat": 43.7116736,
+    "lng": -79.4344129
+  },
+  {
+    "name": "Repshift",
+    "address": "1 King St. W., Suite 4800 - 67, Toronto, M5H 1A1",
+    "lat": 43.6487848,
+    "lng": -79.37809279999999
+  },
+  {
+    "name": "Resolver",
+    "address": "111 Peter St., Suite 804, Toronto, Ontario M5V 2H1, CA",
+    "lat": 43.647861999999996,
+    "lng": -79.39290290000001
+  },
+  {
+    "name": "Resq",
+    "address": "56 The Esplanade, Suite 220, Toronto, Ontario M5E 1A7, CA",
+    "lat": 43.647207699999996,
+    "lng": -79.3741721
+  },
+  {
+    "name": "Rethink Solutions",
+    "address": "5 Kodiak Crescent, Unit 10, Toronto, Ontario M3J 3E5, CA",
+    "lat": 43.7526363,
+    "lng": -79.4654137
+  },
+  {
+    "name": "Rikibo",
+    "address": "100 College St, Toronto, Ontario M5G 1L5 CA",
+    "lat": 43.6604812,
+    "lng": -79.3886581
+  },
+  {
+    "name": "Riskfuel Analytics",
+    "address": "140 Yonge Street, Toronto, ON M5C 1X6",
+    "lat": 43.651080799999995,
+    "lng": -79.3793118
+  },
+  {
+    "name": "RiskRecon",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Robin",
+    "address": "26 Duncan St, Toronto, Ontario M5V 2B9 CA",
+    "lat": 43.648583900000006,
+    "lng": -79.3891119
+  },
+  {
+    "name": "Rock Content",
+    "address": "662 King St W, Toronto, Ontario M5V 1M7 – Canada",
+    "lat": 43.644175,
+    "lng": -79.4022042
+  },
+  {
+    "name": "Rose Rocket",
+    "address": "47 Front St E, Toronto, Ontario M5E 1B3 CA",
+    "lat": 43.6477534,
+    "lng": -79.3742742
+  },
+  {
+    "name": "SafetyHQ, formerly Harnessup",
+    "address": "6739 Main St., Stouffville, Ontario L4A 6B5, CA",
+    "lat": 43.9743116,
+    "lng": -79.23258129999999
+  },
+  {
+    "name": "Sail Cannabis",
+    "address": "5045 Orbitor Dr., Building 11, Suite 300, Mississauga, ON L4W 4Y4",
+    "lat": 43.656951,
+    "lng": -79.5999349
+  },
+  {
+    "name": "SalesChoice",
+    "address": "2300 Yonge Street, Suite 1600, Toronto, Ontario, Canada – M4P 1E4",
+    "lat": 43.7072693,
+    "lng": -79.3996009
+  },
+  {
+    "name": "Salesforce",
+    "address": "10 Bay Street, Suite 400, Toronto, ON, M5J 2R8 Canada",
+    "lat": 43.6412232,
+    "lng": -79.377386
+  },
+  {
+    "name": "SAP Concur",
+    "address": "222 Bay Street, Suite 2000, Toronto, Ontario M5K 1J7",
+    "lat": 43.6474098,
+    "lng": -79.3799011
+  },
+  {
+    "name": "SAS",
+    "address": "280 King St East, Suite 500, Toronto, ON M5A 1K7",
+    "lat": 43.6519938,
+    "lng": -79.3657181
+  },
+  {
+    "name": "Screenlight",
+    "address": "161 1/2 Gladstone Ave, Toronto, Ontario M6J 3L3, CA",
+    "lat": 43.6475337,
+    "lng": -79.42872349999999
+  },
+  {
+    "name": "Seequent",
+    "address": "207 Queens Quay West. Suite 810, Toronto, Ontario",
+    "lat": 43.638874799999996,
+    "lng": -79.38038689999999
+  },
+  {
+    "name": "Sensei Labs",
+    "address": "1106-33 Bloor Street E, Toronto, Ontario M4W 3H1, CA",
+    "lat": 43.6700218,
+    "lng": -79.38558259999999
+  },
+  {
+    "name": "ServiceEcho",
+    "address": "229 Yonge Street, Suite 400, Toronto, Ontario M5B 1N9, CA",
+    "lat": 43.6544008,
+    "lng": -79.3797881
+  },
+  {
+    "name": "ShipFusion",
+    "address": "3600 Ridgeway Dr Unit 6, Mississauga, ON L5L 0B4",
+    "lat": 43.5248352,
+    "lng": -79.7116319
+  },
+  {
+    "name": "Shopbot",
+    "address": "243 Queen Street West, Toronto ON M5V 1Z4",
+    "lat": 43.650185199999996,
+    "lng": -79.3885485
+  },
+  {
+    "name": "Shopbot",
+    "address": "243 Queen Street West, Toronto ON M5V 1Z4",
+    "lat": 43.650185199999996,
+    "lng": -79.3885485
+  },
+  {
+    "name": "SigScale",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Silent Partner Software",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Skeddly, by Eleven41 Software",
+    "address": "47 Westwynd Court, Toronto, Ontario",
+    "lat": 43.6792273,
+    "lng": -79.5691583
+  },
+  {
+    "name": "Smooth Commerce",
+    "address": "36 King St E, Toronto, Ontario M5C, CA",
+    "lat": 43.6497062,
+    "lng": -79.3765177
+  },
+  {
+    "name": "Snowflake",
+    "address": "1 University Ave, Toronto, Canada M5J 2PI Office 03-135",
+    "lat": 43.645885299999996,
+    "lng": -79.3830433
+  },
+  {
+    "name": "SoapBox, now Hypercontext",
+    "address": "110 Spadina Avenue, Suite 200, Toronto ON, M5V 2K4",
+    "lat": 43.6468637,
+    "lng": -79.3960022
+  },
+  {
+    "name": "SoCast Digital",
+    "address": "410 Adelaide St W, Suite 200, Toronto, ON CA",
+    "lat": 43.646653699999995,
+    "lng": -79.3967455
+  },
+  {
+    "name": "Social HorsePower",
+    "address": "18c-219 Dufferin St, Toronto, ON M6K 3J1",
+    "lat": 43.6368605,
+    "lng": -79.42623840000002
+  },
+  {
+    "name": "Solera Audatex",
+    "address": "1210 Sheppard Ave East, Toronto, ON, M2K 1E3 Canada",
+    "lat": 43.7736627,
+    "lng": -79.3675051
+  },
+  {
+    "name": "Solid State AI",
+    "address": "185 Spadina Ave., Toronto, ON, M5T 2C6 Canada",
+    "lat": 43.6496637,
+    "lng": -79.3962683
+  },
+  {
+    "name": "Sortspoke",
+    "address": "111 Peter St, Suite 780, Toronto, Ontario, Canada M5V 2H1",
+    "lat": 43.6480415,
+    "lng": -79.3927143
+  },
+  {
+    "name": "SoundHound",
+    "address": "2 Bloor St E, Suite 2010, Toronto, Ontario M4W 1A8, CA",
+    "lat": 43.6707934,
+    "lng": -79.3856421
+  },
+  {
+    "name": "Spothero",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Sprigg",
+    "address": "100 Broadview Ave, Suite 300, Toronto, Ontario M4M 3H3, CA",
+    "lat": 43.658094899999995,
+    "lng": -79.350166
+  },
+  {
+    "name": "Sprinklr",
+    "address": "151 Yonge Street, 11th Floor, Toronto, ON M5C 2W7 Canada",
+    "lat": 43.651559899999995,
+    "lng": -79.37849720000001
+  },
+  {
+    "name": "Sqirl Capital",
+    "address": "1 Yonge st, Toronto, Ontario M5E 2A3, CA",
+    "lat": 43.6429251,
+    "lng": -79.3741862
+  },
+  {
+    "name": "SQL Power Group",
+    "address": "90 Sheppard Ave E, Suite 400, Toronto, Ontario M2N 3A1, CA",
+    "lat": 43.7629893,
+    "lng": -79.4065787
+  },
+  {
+    "name": "SqueezeCMM",
+    "address": "6 St Joseph St, Toronto, ON M4Y 1J7, Canada",
+    "lat": 43.666191999999995,
+    "lng": -79.38568320000002
+  },
+  {
+    "name": "StaffStat",
+    "address": "316 Notre Dame Ave, Sudbury, Ontario P3C 5K5, CA",
+    "lat": 46.500274499999996,
+    "lng": -80.98663239999999
+  },
+  {
+    "name": "Statflo",
+    "address": "1 Yonge Street, Suite #1900, Toronto, ON M5E 1E5",
+    "lat": 43.6423305,
+    "lng": -79.37427330000001
+  },
+  {
+    "name": "Stencil",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Strainprint Technologies",
+    "address": "55 Town Centre Court, Suite 506, Scarborough, ON M1P 4X4",
+    "lat": 43.773908999999996,
+    "lng": -79.25418379999999
+  },
+  {
+    "name": "Street Contxt",
+    "address": "154 Pearl St., Suite 300, Toronto, ON, M5H 1L3",
+    "lat": 43.647938599999996,
+    "lng": -79.38777309999999
+  },
+  {
+    "name": "Strongpoint",
+    "address": "100 University Ave, 5th Floor, Toronto, ON Canada M5J 1V6",
+    "lat": 43.6472893,
+    "lng": -79.3849726
+  },
+  {
+    "name": "SuiteSpot Technology",
+    "address": "25 Sheppard Avenue West, Suite 300, Toronto, Ontario M2N 6S6, CA",
+    "lat": 43.760878399999996,
+    "lng": -79.41217990000001
+  },
+  {
+    "name": "Surf for Brands, formerly Trufan",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Swift Medical",
+    "address": "1 Richmond Street West, Suite 500, Toronto, ON, M5H 3W4, Canada",
+    "lat": 43.6513704,
+    "lng": -79.379245
+  },
+  {
+    "name": "SwiftAds",
+    "address": "Toronto, Ontario, Canada",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Talcura Technologies",
+    "address": "2900 John St, Markham, ON L3R 5G3, Canada",
+    "lat": 43.825689999999994,
+    "lng": -79.3536548
+  },
+  {
+    "name": "TalentFlow",
+    "address": "2 Sheppard Avenue East, Suite 810, Toronto, ON M2N 5Y7",
+    "lat": 43.7623591,
+    "lng": -79.4103628
+  },
+  {
+    "name": "TalentNet",
+    "address": "2 Bloor St. W #802, Toronto, ON M5T 1G1",
+    "lat": 43.670483999999995,
+    "lng": -79.3873249
+  },
+  {
+    "name": "talkAItive",
+    "address": "1 Yonge St, Toronto, Ontario CA",
+    "lat": 43.6429251,
+    "lng": -79.3741862
+  },
+  {
+    "name": "Tap Report",
+    "address": "181 Bay Street, Toronto, Ontario M5J 0A5, CA",
+    "lat": 43.6466136,
+    "lng": -79.3789803
+  },
+  {
+    "name": "Taplytics",
+    "address": "504 Wellington Street W, 3rd Floor, Toronto, Ontario, M5V 1E3",
+    "lat": 43.643499999999996,
+    "lng": -79.3989498
+  },
+  {
+    "name": "Tasty Tech",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "tealbook",
+    "address": "38 Camden St, Toronto, ON M5V 1V1, CA",
+    "lat": 43.6471526,
+    "lng": -79.39758429999999
+  },
+  {
+    "name": "TeamGram",
+    "address": "1 Yonge St. , Suite 2002, Toronto, ON M5E 1E5, CA",
+    "lat": 43.6423464,
+    "lng": -79.37438709999999
+  },
+  {
+    "name": "Telemed Diagnostic Management",
+    "address": "3701 Chesswood Dr, North York, Ontario M3J 2P6, CA",
+    "lat": 43.756089599999996,
+    "lng": -79.47380919999999
+  },
+  {
+    "name": "Temenos",
+    "address": "2425 Matheson Blvd. East, Suite 400, Mississauga ON L4W 5K4 Canada",
+    "lat": 43.6574664,
+    "lng": -79.6037992
+  },
+  {
+    "name": "TenzorAI",
+    "address": "100 College St, Toronto, Ontario CA M5G 1L5",
+    "lat": 43.6604812,
+    "lng": -79.3886581
+  },
+  {
+    "name": "ThinkData Works",
+    "address": "101-141 Bathurst St., Toronto, ON",
+    "lat": 43.6460589,
+    "lng": -79.402784
+  },
+  {
+    "name": "Thought Spot",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "ThoughtWire",
+    "address": "166 King St E #200, Toronto, ON M5A 1J3, Canada",
+    "lat": 43.650824199999995,
+    "lng": -79.3712527
+  },
+  {
+    "name": "thynq3D",
+    "address": "807-155 Balliol Street Toronto ON M4S 1C4",
+    "lat": 43.697927299999996,
+    "lng": -79.3918941
+  },
+  {
+    "name": "Tia Health",
+    "address": "53 Yonge St, Toronto, Ontario CA",
+    "lat": 43.6482223,
+    "lng": -79.37721739999999
+  },
+  {
+    "name": "Tidal Migrations",
+    "address": "901 King St W, Suite 400 East, Toronto, ON, M5V 3H5",
+    "lat": 43.641884499999996,
+    "lng": -79.41119739999999
+  },
+  {
+    "name": "TimeHero",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "TinEye/Idee",
+    "address": "223 Queen St. East, Toronto, Ontario M5A 1S2, CA",
+    "lat": 43.654253399999995,
+    "lng": -79.3700223
+  },
+  {
+    "name": "TmaxSoft",
+    "address": "2425 Matheson Boulevard East, 8th Floor. Mississauga, Ontario L4W 5K4 Canada",
+    "lat": 43.6574129,
+    "lng": -79.60343979999999
+  },
+  {
+    "name": "TokeIn",
+    "address": "100 King St W, Toronto, Ontario M5X, CA",
+    "lat": 43.648527699999995,
+    "lng": -79.38161529999999
+  },
+  {
+    "name": "TOOLBX",
+    "address": "325 Front St West, Toronto, Ontario, M5V 2Y1",
+    "lat": 43.6431718,
+    "lng": -79.39028549999999
+  },
+  {
+    "name": "Torus Media Labs",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "TouchBistro",
+    "address": "1100 - 85 Richmond St W., Toronto, ON M5H 2C9477 Canada",
+    "lat": 43.650587699999996,
+    "lng": -79.382764
+  },
+  {
+    "name": "TRACKiTT",
+    "address": "1 Yonge Street, Suite 1801, Toronto, Ontario M5E 1W7, CA",
+    "lat": 43.6424459,
+    "lng": -79.37455380000002
+  },
+  {
+    "name": "Trainer +",
+    "address": "367A EGLINTON AVE W, TORONTO, ON, M5N 1A3, CANADA",
+    "lat": 43.704021999999995,
+    "lng": -79.41031250000002
+  },
+  {
+    "name": "TrainingRelief",
+    "address": "1 Yonge St, Toronto, Ontario CA",
+    "lat": 43.6429251,
+    "lng": -79.3741862
+  },
+  {
+    "name": "TRAK Data",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Trialfire",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "TrillaBit",
+    "address": "Bloor St, Toronto, Ontario M9C, CA",
+    "lat": 43.6352293,
+    "lng": -79.56399139999999
+  },
+  {
+    "name": "TripStack",
+    "address": "145 King St W, 1401, Toronto, Ontario M5H 1J8, CA",
+    "lat": 43.6474754,
+    "lng": -79.3840769
+  },
+  {
+    "name": "Trouvus (Roundcube Webmail)",
+    "address": "312 Dolomite Dr. #229, Toronto, Ontario M3J 2N1, CA",
+    "lat": 43.7800812,
+    "lng": -79.4748437
+  },
+  {
+    "name": "Truition (Commerce Dynamics)",
+    "address": "1300 Yonge Street, Suite 703, Toronto, Ontario, Canada, M4T 1X3",
+    "lat": 43.684101999999996,
+    "lng": -79.39256999999999
+  },
+  {
+    "name": "Truluv",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Tulip Retail",
+    "address": "1 York St., #1501, Toronto, ON M5J 0B6, CA",
+    "lat": 43.6415042,
+    "lng": -79.3801526
+  },
+  {
+    "name": "TunnelBear",
+    "address": "310 Spadina Ave, #200, Toronto, Ontario M5T 2E7, CA",
+    "lat": 43.653613899999996,
+    "lng": -79.3985775
+  },
+  {
+    "name": "Twitter",
+    "address": "901 King St W, Toronto, Ontario M5V 3H5, CA",
+    "lat": 43.641948,
+    "lng": -79.41123859999999
+  },
+  {
+    "name": "Tyler Technologies",
+    "address": "6733 Mississauga Road, Suite 308, Mississauga, ON L5N 6J5, Canada",
+    "lat": 43.602807,
+    "lng": -79.74060089999999
+  },
+  {
+    "name": "Uberflip",
+    "address": "370 Dufferin St,, Toronto, ON M6K 1Z8, Canada",
+    "lat": 43.6416864,
+    "lng": -79.4285546
+  },
+  {
+    "name": "Unata",
+    "address": "190 Liberty St. West, Suite 200, Toronto, ON M6K 3E9 Canada",
+    "lat": 43.6377385,
+    "lng": -79.42581729999999
+  },
+  {
+    "name": "Uncanny Owl",
+    "address": "20 Bay Street, 11th Floor, Toronto, Ontario, Canada M5J 2N8",
+    "lat": 43.6415818,
+    "lng": -79.3776894
+  },
+  {
+    "name": "Unyte-iLs",
+    "address": "229-639 Dupont Street, Toronto, ON M6G 1Z4",
+    "lat": 43.6750938,
+    "lng": -79.4053156
+  },
+  {
+    "name": "Upchain",
+    "address": "325 Front Street West, Second floor, M5V 2Y1",
+    "lat": 43.6432809,
+    "lng": -79.39026969999999
+  },
+  {
+    "name": "Valence, formerly SHIFT",
+    "address": "96 Spadina Ave, 302-1, Toronto, Ontario M5V 2J6, CA",
+    "lat": 43.646367999999995,
+    "lng": -79.39591519999999
+  },
+  {
+    "name": "Validere",
+    "address": "87 Scollard St, Toronto, Ontario M5R, CA",
+    "lat": 43.6717976,
+    "lng": -79.39136309999999
+  },
+  {
+    "name": "Valta",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "VarageSale",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Varicent Software",
+    "address": "4711 Yonge St., Suite 300, Toronto, Ontario M2N 6K8, CA",
+    "lat": 43.759503699999996,
+    "lng": -79.4101083
+  },
+  {
+    "name": "Veeva Systems",
+    "address": "20 Toronto St, Toronto, ON M5C 2B8",
+    "lat": 43.6501631,
+    "lng": -79.37656129999999
+  },
+  {
+    "name": "VelocityEHS",
+    "address": "586 Argus Road, Suite 201, Oakville, Ontario L6J 3J3, CA",
+    "lat": 43.457136399999996,
+    "lng": -79.6856004
+  },
+  {
+    "name": "Vemba",
+    "address": "480 University Ave, Toronto, Ontario M5G, CA",
+    "lat": 43.6550684,
+    "lng": -79.38888539999999
+  },
+  {
+    "name": "Veme.ly",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "Vena Solutions",
+    "address": "2 Fraser Ave, Toronto, Ontario M6K, CA",
+    "lat": 43.635253899999995,
+    "lng": -79.4233672
+  },
+  {
+    "name": "Venngage",
+    "address": "28A Sterling Road, Unit 300, Toronto, Ontario M6R 2B7, CA",
+    "lat": 43.651006599999995,
+    "lng": -79.443225
+  },
+  {
+    "name": "Vennsa Technologies",
+    "address": "250 St. George Street, Suite 401, Toronto, ON, Canada M5R 3L8",
+    "lat": 43.672716,
+    "lng": -79.40239199999999
+  },
+  {
+    "name": "Verizon Connect",
+    "address": "1 Adelaide St, Suite 2400, Toronto, Ontario, M5C 2V9",
+    "lat": 43.6501593,
+    "lng": -79.3777934
+  },
+  {
+    "name": "VersaPay",
+    "address": "18 King St E, Toronto, Ontario M5C 1C4 CA",
+    "lat": 43.6496485,
+    "lng": -79.37708950000001
+  },
+  {
+    "name": "vGIS",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "vi",
+    "address": "4950 Yonge Street , Toronto, Ontario M2N 6K1, CA",
+    "lat": 43.7648586,
+    "lng": -79.4121017
+  },
+  {
+    "name": "Via",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "videoBIO Recruiter",
+    "address": "2149 Yonge St., Suite #202, Toronto, ON, M4S 0C5 CANADA",
+    "lat": 43.7041294,
+    "lng": -79.39753569999999
+  },
+  {
+    "name": "Vielight",
+    "address": "471 Jarvis Street, Toronto, ON, M4Y 2G8 Canada",
+    "lat": 43.664999099999996,
+    "lng": -79.3773315
+  },
+  {
+    "name": "Volante Systems",
+    "address": "49 Coldwater Road, Toronto, Ontario, M3B 1Y8",
+    "lat": 43.75508,
+    "lng": -79.35789
+  },
+  {
+    "name": "Voxme Software",
+    "address": "28 Finch Avenue West, Unit 201,Toronto, Ontario, Canada, M2N 2G7",
+    "lat": 43.7793729,
+    "lng": -79.4183247
+  },
+  {
+    "name": "VTS",
+    "address": "110 Younge St., Suite 1701, Toronto, ON M5C 1T4 Canada",
+    "lat": 43.650142900000006,
+    "lng": -79.3787241
+  },
+  {
+    "name": "VXG",
+    "address": "56 Temperance St., Suite 700, Toronto, Ontario M5H 3V5, CA",
+    "lat": 43.6506273,
+    "lng": -79.3817208
+  },
+  {
+    "name": "WellnessLiving",
+    "address": "68B Leek Crescent, Richmond Hill, Ontario L4B 1H1, Canada",
+    "lat": 43.8576467,
+    "lng": -79.3748021
+  },
+  {
+    "name": "Workflow International",
+    "address": "299 Balliol St., Toronto ON Canada M4S 1C7",
+    "lat": 43.699058199999996,
+    "lng": -79.3872356
+  },
+  {
+    "name": "Xactly",
+    "address": "Toronto, ON",
+    "lat": 43.653226,
+    "lng": -79.3831843
+  },
+  {
+    "name": "XapCard",
+    "address": "145 King St. W, Suite 2850, Toronto, ON.",
+    "lat": 43.6474382,
+    "lng": -79.383932
+  },
+  {
+    "name": "Xcare",
+    "address": "1810 Ironstone, Burlington, On L7L 0A1, CA",
+    "lat": 43.38941510000001,
+    "lng": -79.79202389999999
+  },
+  {
+    "name": "Xello, formerly Career Cruising",
+    "address": "1867 Yonge St. Suite 700, Toronto, ON. M4S 1Y5, Canada",
+    "lat": 43.6975814,
+    "lng": -79.39627639999999
+  },
+  {
+    "name": "Yardi",
+    "address": "5925 Airport Road, Suite 605, Mississauga, ON L4V 1W1 Canada",
+    "lat": 43.6876384,
+    "lng": -79.6097621
+  },
+  {
+    "name": "Zafin",
+    "address": "330 Bay St, Toronto, Ontario CA M5J 0B6",
+    "lat": 43.649993200000004,
+    "lng": -79.3811834
+  },
+  {
+    "name": "ZED Network",
+    "address": "100 College St., Suite 150, Toronto, Ontario M5G 1P5, CA",
+    "lat": 43.6604812,
+    "lng": -79.3886581
+  },
+  {
+    "name": "Zerofootprint",
+    "address": "461 King St. West, 3rd floor, Toronto, On. Canada M5V1K4",
+    "lat": 43.6449657,
+    "lng": -79.3963275
+  }
+]
