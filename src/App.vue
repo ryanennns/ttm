@@ -354,8 +354,15 @@ function addRoads(collection) {
     color: 0x1a2a30,
     roughness: 1,
     metalness: 0,
+    // Road polygons overlap at intersections; avoid coplanar fragments fighting in the depth buffer.
+    depthWrite: false,
   })
-  const roadEdgeMaterial = new THREE.LineBasicMaterial({ color: 0x385057, transparent: true, opacity: 0.38 })
+  const roadEdgeMaterial = new THREE.LineBasicMaterial({
+    color: 0x385057,
+    transparent: true,
+    opacity: 0.38,
+    depthWrite: false,
+  })
 
   const roadGeometries = []
   const roadEdges = []
