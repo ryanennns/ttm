@@ -104,8 +104,6 @@ let animationFrame
 let buildingGroup
 let roadGroup
 let lastStatusUpdate = 0
-let twoFingerStartDistance
-let twoFingerMode
 const seenBuildingIds = new Set()
 const seenRoadIds = new Set()
 
@@ -433,29 +431,6 @@ function animate() {
   }
 }
 
-function classifyTwoFingerTouch(event) {
-  if (event.touches.length !== 2) return
-  const [first, second] = event.touches
-  const distance = Math.hypot(first.clientX - second.clientX, first.clientY - second.clientY)
-
-  if (event.type === 'touchstart') {
-    twoFingerStartDistance = distance
-    twoFingerMode = undefined
-    return
-  }
-
-  if (!twoFingerMode) twoFingerMode = Math.abs(distance - twoFingerStartDistance) > 4 ? 'zoom' : 'rotate'
-  controls.enableZoom = twoFingerMode === 'zoom'
-  controls.enableRotate = twoFingerMode === 'rotate'
-}
-
-function resetTwoFingerTouch() {
-  twoFingerStartDistance = undefined
-  twoFingerMode = undefined
-  controls.enableZoom = true
-  controls.enableRotate = true
-}
-
 onMounted(() => {
   createScene()
 
@@ -490,11 +465,6 @@ onMounted(() => {
   controls.screenSpacePanning = false
   controls.update()
 
-  renderer.domElement.addEventListener('touchstart', classifyTwoFingerTouch, { capture: true })
-  renderer.domElement.addEventListener('touchmove', classifyTwoFingerTouch, { capture: true })
-  renderer.domElement.addEventListener('touchend', resetTwoFingerTouch, { capture: true })
-  renderer.domElement.addEventListener('touchcancel', resetTwoFingerTouch, { capture: true })
-
   window.addEventListener('resize', resizeScene)
   animate()
   loadMapData()
@@ -504,10 +474,6 @@ onBeforeUnmount(() => {
   cancelAnimationFrame(animationFrame)
   window.removeEventListener('resize', resizeScene)
   controls?.dispose()
-  renderer?.domElement.removeEventListener('touchstart', classifyTwoFingerTouch, { capture: true })
-  renderer?.domElement.removeEventListener('touchmove', classifyTwoFingerTouch, { capture: true })
-  renderer?.domElement.removeEventListener('touchend', resetTwoFingerTouch, { capture: true })
-  renderer?.domElement.removeEventListener('touchcancel', resetTwoFingerTouch, { capture: true })
   renderer?.dispose()
 })
 </script>
