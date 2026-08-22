@@ -121,7 +121,7 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
-import { selectBuildingFeatures } from './building-geometry.js'
+import { pointInRing, selectBuildingFeatures } from './building-geometry.js'
 import companyData from './companies.json'
 import { selectCompanyRecords } from './company-data.js'
 
@@ -185,12 +185,37 @@ const clock = new THREE.Clock()
 
 const statusLabel = computed(() => (error.value ? 'SOURCE OFFLINE' : loading.value ? 'SYNCING DATA' : 'LIVE DATA'))
 
+function createCompanyMarkerTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 64
+  canvas.height = 64
+  const context = canvas.getContext('2d')
+  context.beginPath()
+  context.arc(32, 32, 24, 0, Math.PI * 2)
+  context.fillStyle = '#ffffff'
+  context.fill()
+  return new THREE.CanvasTexture(canvas)
+}
+
 const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0x6e9697, roughness: 0.9, flatShading: true })
-const companyMarkerMaterial = new THREE.MeshBasicMaterial({ color: 0xf0b67f, depthTest: false, depthWrite: false })
-const selectedCompanyMarkerMaterial = new THREE.MeshBasicMaterial({ color: 0xffedc8, depthTest: false, depthWrite: false })
-const companyMarkerBaseGeometry = new THREE.CylinderGeometry(3.2, 3.2, 0.8, 8)
-const companyMarkerStemGeometry = new THREE.CylinderGeometry(0.45, 0.45, 5, 6)
-const companyMarkerHeadGeometry = new THREE.SphereGeometry(2.4, 8, 6)
+const companyMarkerTexture = createCompanyMarkerTexture()
+const companyMarkerMaterial = new THREE.SpriteMaterial({
+  map: companyMarkerTexture,
+  color: 0xf0b67f,
+  transparent: true,
+  depthTest: false,
+  depthWrite: false,
+})
+const selectedCompanyMarkerMaterial = new THREE.SpriteMaterial({
+  map: companyMarkerTexture,
+  color: 0xffedc8,
+  transparent: true,
+  depthTest: false,
+  depthWrite: false,
+})
+const COMPANY_MARKER_SIZE = 7
+const COMPANY_MARKER_FALLBACK_Y = 18
+const buildingPlacements = []
 
 function projectCoordinate([longitude, latitude]) {
   return {
@@ -223,7 +248,7 @@ function polygonSets(geometry) {
   return []
 }
 
-function featureDistanceMeters(feature) {
+function featureDistanceMeters(feature, coordinate = [CENTER.lon, CENTER.lat]) {
   const ring = polygonSets(feature.geometry)[0]?.[0]
   if (!ring?.length) return Infinity
 
@@ -239,9 +264,16 @@ function featureDistanceMeters(feature) {
   midpoint.lat /= ring.length
 
   return Math.hypot(
-    (midpoint.lon - CENTER.lon) * METERS_PER_LONGITUDE,
-    (midpoint.lat - CENTER.lat) * METERS_PER_LATITUDE,
+    (midpoint.lon - coordinate[0]) * METERS_PER_LONGITUDE,
+    (midpoint.lat - coordinate[1]) * METERS_PER_LATITUDE,
   )
+}
+
+function featureContainsCoordinate(feature, coordinate) {
+  return polygonSets(feature.geometry).some((rings) => {
+    if (!rings[0]?.length || !pointInRing(coordinate, rings[0])) return false
+    return !rings.slice(1).some((hole) => pointInRing(coordinate, hole))
+  })
 }
 
 function getHeight(properties) {
@@ -249,8 +281,13 @@ function getHeight(properties) {
   return Number.isFinite(derivedHeight) && derivedHeight > 0 ? Math.min(derivedHeight, 350) : 8
 }
 
+function featureBaseY(feature, baseElevation = GROUND_ELEVATION) {
+  const elevation = Number(feature.properties?.ELEVATION)
+  return Number.isFinite(elevation) ? Math.max(0, (elevation - baseElevation) * SCALE) : 0
+}
+
 function featureGeometries(feature, height, baseElevation) {
-  const baseY = Math.max(0, (Number(feature.properties?.ELEVATION) - baseElevation) * SCALE)
+  const baseY = featureBaseY(feature, baseElevation)
   const parts = []
 
   for (const rings of polygonSets(feature.geometry)) {
@@ -271,33 +308,38 @@ function featureGeometries(feature, height, baseElevation) {
   return parts
 }
 
+function markerHeightForCompany(company) {
+  const coordinate = [company.lng, company.lat]
+  const building = buildingPlacements.find(({ feature }) => featureContainsCoordinate(feature, coordinate))
+  if (building) return building.topY
+
+  let nearest
+  for (const placement of buildingPlacements) {
+    const distance = featureDistanceMeters(placement.feature, coordinate)
+    if (!nearest || distance < nearest.distance) nearest = { distance, placement }
+  }
+
+  return nearest?.distance <= 75 ? nearest.placement.topY : COMPANY_MARKER_FALLBACK_Y
+}
+
+// ponytail: one-time O(companies × buildings) placement scan; add a spatial index if either dataset grows.
+function positionCompanyMarkers() {
+  for (const marker of companyGroup?.children || []) marker.position.y = markerHeightForCompany(marker.userData.company)
+}
+
 function setCompanyMarkerSelected(marker, selected) {
-  marker.scale.setScalar(selected ? 1.35 : 1)
-  marker.traverse((part) => {
-    if (part.isMesh) part.material = selected ? selectedCompanyMarkerMaterial : companyMarkerMaterial
-  })
+  marker.scale.setScalar(COMPANY_MARKER_SIZE * (selected ? 1.35 : 1))
+  marker.material = selected ? selectedCompanyMarkerMaterial : companyMarkerMaterial
 }
 
 function addCompanyMarkers() {
   for (const company of sceneCompanies) {
     const point = projectCoordinate([company.lng, company.lat])
-    const marker = new THREE.Group()
-    marker.position.set(point.x, 0, point.z)
+    const marker = new THREE.Sprite(companyMarkerMaterial)
+    marker.position.set(point.x, COMPANY_MARKER_FALLBACK_Y, point.z)
+    marker.scale.setScalar(COMPANY_MARKER_SIZE)
     marker.userData.company = company
-
-    const base = new THREE.Mesh(companyMarkerBaseGeometry, companyMarkerMaterial)
-    base.position.y = 0.4
-    const stem = new THREE.Mesh(companyMarkerStemGeometry, companyMarkerMaterial)
-    stem.position.y = 3.3
-    const head = new THREE.Mesh(companyMarkerHeadGeometry, companyMarkerMaterial)
-    head.position.y = 6.2
-    marker.add(base, stem, head)
-    marker.traverse((part) => {
-      if (part.isMesh) {
-        part.userData.company = company
-        part.userData.companyMarker = marker
-      }
-    })
+    marker.userData.companyMarker = marker
     companyGroup.add(marker)
   }
 }
@@ -315,6 +357,10 @@ function addBuildings(collection) {
   for (const feature of features) {
     const height = getHeight(feature.properties)
     const parts = featureGeometries(feature, height, GROUND_ELEVATION)
+    buildingPlacements.push({
+      feature,
+      topY: featureBaseY(feature) + height * SCALE + 1.5,
+    })
     for (const geometry of parts) {
       const mesh = new THREE.Mesh(geometry, buildingMaterial)
       mesh.castShadow = false
@@ -464,6 +510,7 @@ async function loadMapData() {
     await new Promise((resolve) => requestAnimationFrame(resolve))
   }
 
+  positionCompanyMarkers()
   if (errors.length) error.value = `${errors.length} municipal tile request${errors.length === 1 ? '' : 's'} failed.`
 
   loading.value = false
