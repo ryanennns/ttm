@@ -124,6 +124,7 @@ const tutorialSteps = [
 ]
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
+const PAN_RADIUS_METERS = 1_000
 const RADIUS_METERS = 2_500
 const TILE_METERS = 750
 // ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
@@ -541,6 +542,7 @@ onMounted(() => {
 
   controls = new OrbitControls(camera, renderer.domElement)
   controls.target.set(0, 0, 0)
+  controls.maxTargetRadius = PAN_RADIUS_METERS * SCALE
   controls.enableDamping = true
   controls.dampingFactor = 0.075
   controls.panSpeed = 2
