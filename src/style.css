@@ -64,15 +64,6 @@ button {
   height: 100%;
 }
 
-.viewport-wash {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, rgba(7, 14, 18, 0.64) 0%, rgba(7, 14, 18, 0.08) 31%, rgba(7, 14, 18, 0.02) 68%, rgba(7, 14, 18, 0.32) 100%);
-}
-
 .loading-state,
 .data-error {
   position: absolute;

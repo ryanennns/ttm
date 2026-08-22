@@ -5,8 +5,6 @@
       class="viewport"
       :class="{ 'is-loading': loading }"
     >
-      <div class="viewport-wash"></div>
-
       <div v-if="loading" class="loading-state">
         <span class="loading-orbit"></span>
         <p>{{ statusMessage }}</p>
