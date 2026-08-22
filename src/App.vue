@@ -469,7 +469,7 @@ function animate() {
   const delta = clock.getDelta()
   if (zoomRate.value && camera && controls) {
     const distance = THREE.MathUtils.clamp(
-      controls.getDistance() * Math.exp(-zoomRate.value * delta * 2),
+      controls.getDistance() * Math.exp(-zoomRate.value * delta * 0.5),
       controls.minDistance,
       controls.maxDistance,
     )
