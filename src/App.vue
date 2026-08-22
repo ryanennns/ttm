@@ -333,6 +333,7 @@ function addBuildings(collection) {
   }
 
   for (const [bucket, geometries] of mergedParts) {
+    if (!geometries.length) continue
     const merged = mergeGeometries(geometries, false)
     if (!merged) continue
     merged.computeBoundingSphere()
@@ -379,11 +380,11 @@ function addRoads(collection) {
     }
   }
 
-  const mergedRoads = mergeGeometries(roadGeometries, false)
+  const mergedRoads = roadGeometries.length ? mergeGeometries(roadGeometries, false) : null
   if (mergedRoads) roadGroup.add(new THREE.Mesh(mergedRoads, roadMaterial))
   roadGeometries.forEach((geometry) => geometry.dispose())
 
-  const mergedEdges = mergeGeometries(roadEdges, false)
+  const mergedEdges = roadEdges.length ? mergeGeometries(roadEdges, false) : null
   if (mergedEdges) roadGroup.add(new THREE.LineSegments(mergedEdges, roadEdgeMaterial))
   roadEdges.forEach((geometry) => geometry.dispose())
 }
