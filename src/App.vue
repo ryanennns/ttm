@@ -159,25 +159,7 @@ const clock = new THREE.Clock()
 
 const statusLabel = computed(() => (error.value ? 'SOURCE OFFLINE' : loading.value ? 'SYNCING DATA' : 'LIVE DATA'))
 
-const colorPalette = [0x6e9697, 0x7f9a9a, 0xb18c6b, 0x8b7c83, 0x63818c]
-const materialPairs = new Map()
-
-function materialBucket(height) {
-  return height > 180 ? 0 : height > 110 ? 1 : height > 55 ? 2 : 3
-}
-
-function getMaterialPair(height) {
-  const bucket = materialBucket(height)
-  if (!materialPairs.has(bucket)) {
-    const sideColor = new THREE.Color(colorPalette[bucket])
-    const roofColor = sideColor.clone().offsetHSL(0, -0.02, 0.1)
-    materialPairs.set(bucket, [
-      new THREE.MeshStandardMaterial({ color: sideColor, roughness: 0.9, flatShading: true }),
-      new THREE.MeshStandardMaterial({ color: roofColor, roughness: 0.95, flatShading: true }),
-    ])
-  }
-  return materialPairs.get(bucket)
-}
+const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0x6e9697, roughness: 0.9, flatShading: true })
 
 function projectCoordinate([longitude, latitude]) {
   return {
@@ -272,7 +254,7 @@ function addBuildings(collection) {
     const height = getHeight(feature.properties)
     const parts = featureGeometries(feature, height, GROUND_ELEVATION)
     for (const geometry of parts) {
-      const mesh = new THREE.Mesh(geometry, getMaterialPair(height))
+      const mesh = new THREE.Mesh(geometry, buildingMaterial)
       mesh.castShadow = false
       mesh.receiveShadow = true
       buildingGroup.add(mesh)
