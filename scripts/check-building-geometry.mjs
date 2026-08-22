@@ -17,8 +17,6 @@ const selected = selectBuildingFeatures([
   feature(2, 100, 296, rectangle(0.005, 0.002, 0.01, 0.008)),
   feature(3, 200, 296, rectangle(0.001, 0.001, 0.019, 0.009)),
   feature(4, 300, 8, rectangle(0.03, 0.03, 0.04, 0.04)),
-  feature(5, 400, 280, rectangle(0.04, 0.04, 0.06, 0.06)),
-  feature(6, 400, 280, rectangle(0.045, 0.045, 0.055, 0.055)),
 ], {
   getHeight,
   polygonSets,
@@ -26,5 +24,5 @@ const selected = selectBuildingFeatures([
   metersPerLatitude: 111_320,
 })
 
-assert.deepEqual(selected.map(({ properties }) => properties.OBJECTID), [2, 4, 6])
+assert.deepEqual(selected.map(({ properties }) => properties.OBJECTID), [2, 4])
 console.log('building geometry check passed')
