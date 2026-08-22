@@ -126,7 +126,6 @@ const tallest = ref(0)
 
 const CENTER = Object.freeze({ lat: 43.650085, lon: -79.38075 })
 const RADIUS_METERS = 2_500
-const INDIVIDUAL_RENDER_RADIUS_METERS = 500
 const TILE_METERS = 750
 // ponytail: fixed downtown datum keeps center-out tiles aligned; terrain needs a real surface before this becomes dynamic.
 const GROUND_ELEVATION = 80
@@ -264,9 +263,6 @@ function featureGeometries(feature, height, baseElevation) {
 function addBuildings(collection) {
   const features = (collection.features || []).filter(
     (feature) => {
-      // City record 152523 is an oversized 295 m complex envelope; the source has the accurate tower footprint separately.
-      if (feature.properties?.OBJECTID === 152523) return false
-
       const id = feature.properties?.OBJECTID || feature.properties?.BUILDINGID
       if (!id || seenBuildingIds.has(id)) return false
       seenBuildingIds.add(id)
@@ -274,39 +270,15 @@ function addBuildings(collection) {
     },
   )
 
-  const mergedParts = new Map()
-
   for (const feature of features) {
     const height = getHeight(feature.properties)
     const parts = featureGeometries(feature, height, GROUND_ELEVATION)
-    const isNearCenter = featureDistanceMeters(feature) <= INDIVIDUAL_RENDER_RADIUS_METERS
-
-    if (isNearCenter) {
-      for (const geometry of parts) {
-        const mesh = new THREE.Mesh(geometry, getMaterialPair(height))
-        mesh.castShadow = false
-        mesh.receiveShadow = true
-        buildingGroup.add(mesh)
-      }
-      continue
+    for (const geometry of parts) {
+      const mesh = new THREE.Mesh(geometry, getMaterialPair(height))
+      mesh.castShadow = false
+      mesh.receiveShadow = true
+      buildingGroup.add(mesh)
     }
-
-    const bucket = materialBucket(height)
-    if (!mergedParts.has(bucket)) mergedParts.set(bucket, [])
-    mergedParts.get(bucket).push(...parts)
-  }
-
-  for (const [bucket, geometries] of mergedParts) {
-    if (!geometries.length) continue
-    const merged = mergeGeometries(geometries, false)
-    if (!merged) continue
-    merged.computeBoundingSphere()
-    const mesh = new THREE.Mesh(merged, getMaterialPair([240, 140, 80, 30][bucket]))
-    mesh.userData.merged = true
-    mesh.castShadow = false
-    mesh.receiveShadow = true
-    buildingGroup.add(mesh)
-    geometries.forEach((geometry) => geometry.dispose())
   }
 
   buildingCount.value += features.length
@@ -570,6 +542,12 @@ onMounted(() => {
   controls.target.set(0, 0, 0)
   controls.enableDamping = true
   controls.dampingFactor = 0.075
+  controls.panSpeed = 2
+  controls.mouseButtons = {
+    LEFT: THREE.MOUSE.PAN,
+    MIDDLE: THREE.MOUSE.DOLLY,
+    RIGHT: THREE.MOUSE.ROTATE,
+  }
   controls.minDistance = 34
   controls.maxDistance = 1_500
   controls.minPolarAngle = 0.25
